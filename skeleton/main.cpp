@@ -30,6 +30,8 @@ PxDefaultCpuDispatcher*	gDispatcher = NULL;
 PxScene*				gScene      = NULL;
 ContactReportCallback gContactReportCallback;
 
+RenderItem* obj;
+
 
 // Initialize physics engine
 void initPhysics(bool interactive)
@@ -54,6 +56,13 @@ void initPhysics(bool interactive)
 	sceneDesc.filterShader = contactReportFilterShader;
 	sceneDesc.simulationEventCallback = &gContactReportCallback;
 	gScene = gPhysics->createScene(sceneDesc);
+
+
+	PxTransform* btr = new PxTransform({ 0,0,0 });
+
+	obj = new RenderItem(CreateShape(PxSphereGeometry(20)), btr, { 1, 0, 0, 1 });
+
+
 	}
 
 
@@ -73,6 +82,10 @@ void stepPhysics(bool interactive, double t)
 void cleanupPhysics(bool interactive)
 {
 	PX_UNUSED(interactive);
+
+
+	DeregisterRenderItem(obj);
+
 
 	// Rigid Body ++++++++++++++++++++++++++++++++++++++++++
 	gScene->release();
