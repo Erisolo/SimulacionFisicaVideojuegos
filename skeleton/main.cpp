@@ -3,6 +3,7 @@
 #include <PxPhysicsAPI.h>
 
 #include <vector>
+#include "Vector3D.h"
 
 #include "core.hpp"
 #include "RenderUtils.hpp"
@@ -60,11 +61,15 @@ void initPhysics(bool interactive)
 	sceneDesc.simulationEventCallback = &gContactReportCallback;
 	gScene = gPhysics->createScene(sceneDesc);
 
+	Vector3D vec(0, 0, 0);
+	Vector3D vecx(20, 0, 0);
+	Vector3D vecy(0, 20, 0);
+	Vector3D vecz(0, 0, 20);
 
-	objt = new PxTransform({ 0,0,0 });
-	objxt = new PxTransform({ 20,0,0 });
-	objyt = new PxTransform({ 0,20,0 });
-	objzt = new PxTransform({ 0,0,20 });
+	objt = new PxTransform({ vec.getX(),vec.getY(),vec.getZ()});
+	objxt = new PxTransform({ vecx.getX(),vecx.getY(),vecx.getZ() });
+	objyt = new PxTransform({ vecy.getX(),vecy.getY(),vecy.getZ() });
+	objzt = new PxTransform({ vecz.getX(),vecz.getY(),vecz.getZ() });
 
 
 	obj = new RenderItem(CreateShape(PxSphereGeometry(5)), objt, { 1, 1, 1, 1 });
