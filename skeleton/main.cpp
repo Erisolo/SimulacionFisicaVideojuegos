@@ -30,7 +30,10 @@ PxDefaultCpuDispatcher*	gDispatcher = NULL;
 PxScene*				gScene      = NULL;
 ContactReportCallback gContactReportCallback;
 
-RenderItem* obj;
+RenderItem* obj;	PxTransform* objt;
+RenderItem* objX;	PxTransform* objxt;
+RenderItem* objY;	PxTransform* objyt;
+RenderItem* objZ;	PxTransform* objzt;
 
 
 // Initialize physics engine
@@ -58,10 +61,16 @@ void initPhysics(bool interactive)
 	gScene = gPhysics->createScene(sceneDesc);
 
 
-	PxTransform* btr = new PxTransform({ 0,0,0 });
+	objt = new PxTransform({ 0,0,0 });
+	objxt = new PxTransform({ 20,0,0 });
+	objyt = new PxTransform({ 0,20,0 });
+	objzt = new PxTransform({ 0,0,20 });
 
-	obj = new RenderItem(CreateShape(PxSphereGeometry(20)), btr, { 1, 0, 0, 1 });
 
+	obj = new RenderItem(CreateShape(PxSphereGeometry(5)), objt, { 1, 1, 1, 1 });
+	objX = new RenderItem(CreateShape(PxSphereGeometry(5)), objxt, { 1, 0, 0, 1 });
+	objY = new RenderItem(CreateShape(PxSphereGeometry(5)), objyt, { 0, 1, 0, 1 });
+	objZ = new RenderItem(CreateShape(PxSphereGeometry(5)), objzt, { 0, 0, 1, 1 });
 
 	}
 
@@ -85,6 +94,10 @@ void cleanupPhysics(bool interactive)
 
 
 	DeregisterRenderItem(obj);
+	delete obj;		delete objt;
+	delete objX;	delete objxt;
+	delete objY;	delete objyt;
+	delete objZ;	delete objzt;
 
 
 	// Rigid Body ++++++++++++++++++++++++++++++++++++++++++
