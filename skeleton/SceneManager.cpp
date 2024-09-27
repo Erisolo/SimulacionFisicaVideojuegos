@@ -12,7 +12,7 @@ void SceneManager::init()
 {
 	//A METER COSAS VENGAAA
 
-	part = new Particle(Vector3(0,0,0), Vector3(0,10,0), Vector3(0, 10, 0)); //por ahora solo eso
+	part = new Particle(Vector3(0,0,0), Vector3(0,10,0), Vector3(0, 10, 0), 0.98); //por ahora solo eso
 }
 
 void SceneManager::Uptade(double t)

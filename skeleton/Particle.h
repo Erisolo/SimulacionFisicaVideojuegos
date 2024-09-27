@@ -9,7 +9,7 @@ class Particle
 {
 
 public:
-	Particle(Vector3 pos, Vector3 vel, Vector3 acc);
+	Particle(Vector3 pos, Vector3 vel, Vector3 acc, double d);
 	~Particle();
 
 	void Integrate(double t);
@@ -18,6 +18,7 @@ public:
 private:
 	Vector3 vel;
 	Vector3 acc;
+	double damping;
 	PxTransform Pose;
 	RenderItem* renderItem;
 };
