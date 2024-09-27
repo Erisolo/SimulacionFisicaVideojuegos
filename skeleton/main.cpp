@@ -11,9 +11,7 @@
 #include <iostream>
 
 
-
-
-#include "Particle.h"
+#include "SceneManager.h"
 std::string display_text = "This is a test";
 
 
@@ -36,8 +34,8 @@ ContactReportCallback gContactReportCallback;
 
 
 
+SceneManager* sceneManager;
 
-Particle* part;
 // Initialize physics engine
 void initPhysics(bool interactive)
 {
@@ -63,8 +61,8 @@ void initPhysics(bool interactive)
 	gScene = gPhysics->createScene(sceneDesc);
 
 
-	part = new Particle({0,0,0}, {0,0,0});
-
+	sceneManager = new SceneManager();
+	sceneManager->init();
 
 	}
 
@@ -75,6 +73,8 @@ void initPhysics(bool interactive)
 void stepPhysics(bool interactive, double t)
 {
 	PX_UNUSED(interactive);
+
+	sceneManager->Uptade(t);
 
 	gScene->simulate(t);
 	gScene->fetchResults(true);
@@ -87,7 +87,7 @@ void cleanupPhysics(bool interactive)
 	PX_UNUSED(interactive);
 
 	//borrando objetos
-	delete part;
+	delete sceneManager;
 
 
 	// Rigid Body ++++++++++++++++++++++++++++++++++++++++++
