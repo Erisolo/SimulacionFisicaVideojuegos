@@ -3,7 +3,6 @@
 #include <PxPhysicsAPI.h>
 
 #include <vector>
-#include "Vector3D.h"
 
 #include "core.hpp"
 #include "RenderUtils.hpp"
@@ -11,6 +10,10 @@
 
 #include <iostream>
 
+
+
+
+#include "Particle.h"
 std::string display_text = "This is a test";
 
 
@@ -31,12 +34,10 @@ PxDefaultCpuDispatcher*	gDispatcher = NULL;
 PxScene*				gScene      = NULL;
 ContactReportCallback gContactReportCallback;
 
-RenderItem* obj;	PxTransform* objt;
-RenderItem* objX;	PxTransform* objxt;
-RenderItem* objY;	PxTransform* objyt;
-RenderItem* objZ;	PxTransform* objzt;
 
 
+
+Particle* part;
 // Initialize physics engine
 void initPhysics(bool interactive)
 {
@@ -61,21 +62,9 @@ void initPhysics(bool interactive)
 	sceneDesc.simulationEventCallback = &gContactReportCallback;
 	gScene = gPhysics->createScene(sceneDesc);
 
-	Vector3D vec(0, 0, 0);
-	Vector3D vecx(20, 0, 0);
-	Vector3D vecy(0, 20, 0);
-	Vector3D vecz(0, 0, 20);
 
-	objt = new PxTransform({ vec.getX(),vec.getY(),vec.getZ()});
-	objxt = new PxTransform({ vecx.getX(),vecx.getY(),vecx.getZ() });
-	objyt = new PxTransform({ vecy.getX(),vecy.getY(),vecy.getZ() });
-	objzt = new PxTransform({ vecz.getX(),vecz.getY(),vecz.getZ() });
+	part = new Particle({0,0,0}, {0,0,0});
 
-
-	obj = new RenderItem(CreateShape(PxSphereGeometry(5)), objt, { 1, 1, 1, 1 });
-	objX = new RenderItem(CreateShape(PxSphereGeometry(5)), objxt, { 1, 0, 0, 1 });
-	objY = new RenderItem(CreateShape(PxSphereGeometry(5)), objyt, { 0, 1, 0, 1 });
-	objZ = new RenderItem(CreateShape(PxSphereGeometry(5)), objzt, { 0, 0, 1, 1 });
 
 	}
 
@@ -97,12 +86,8 @@ void cleanupPhysics(bool interactive)
 {
 	PX_UNUSED(interactive);
 
-
-	DeregisterRenderItem(obj);
-	delete obj;		delete objt;
-	delete objX;	delete objxt;
-	delete objY;	delete objyt;
-	delete objZ;	delete objzt;
+	//borrando objetos
+	delete part;
 
 
 	// Rigid Body ++++++++++++++++++++++++++++++++++++++++++
