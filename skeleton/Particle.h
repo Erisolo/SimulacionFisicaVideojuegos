@@ -9,13 +9,15 @@ class Particle
 {
 
 public:
-	Particle(Vector3 pos, Vector3 vel);
+	Particle(Vector3 pos, Vector3 vel, Vector3 acc);
 	~Particle();
 
 	void Integrate(double t);
+	void ChangeAcceleration(Vector3 acc);
 
 private:
 	Vector3 vel;
+	Vector3 acc;
 	PxTransform Pose;
 	RenderItem* renderItem;
 };
