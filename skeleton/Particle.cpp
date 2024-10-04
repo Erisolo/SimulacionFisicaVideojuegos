@@ -6,6 +6,7 @@ Particle::Particle(Vector3 pos, Vector3 Vel, Vector3 acc_, double d): vel(Vel), 
 	Pose = PxTransform(pos);
 
 	renderItem = new RenderItem(CreateShape(PxSphereGeometry(2)), &Pose, { 0.8, 0, 0.8, 1 });
+	
 }
 
 Particle::~Particle()

@@ -111,7 +111,22 @@ void keyPress(unsigned char key, const PxTransform& camera)
 	{
 	case 'P':
 	{
-		sceneManager->Shoot();
+		sceneManager->Shoot('P', camera.p);
+		break;
+	}
+	case 'G': //globo
+	{
+		sceneManager->Shoot('G', camera.p);
+		break;
+	}
+	case 'B': //bala
+	{
+		sceneManager->Shoot('B', camera.p);
+		break;
+	}
+	case 'V': //vertical
+	{
+		sceneManager->Shoot('V', camera.p);
 		break;
 	}
 	case ' ':

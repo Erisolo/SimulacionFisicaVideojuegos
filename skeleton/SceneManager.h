@@ -8,7 +8,7 @@ public:
 
 	void init();
 	void Uptade(double t);
-	void Shoot();
+	void Shoot(char c, Vector3 pos);
 
 
 private:

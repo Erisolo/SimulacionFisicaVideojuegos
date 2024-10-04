@@ -14,6 +14,8 @@ public:
 
 	virtual void Integrate(double t);
 	void ChangeAcceleration(Vector3 acc);
+	bool hasTouchedGround() { return Pose.p.y <= 0; }
+	void changeColor(Vector4 color) { renderItem->color = color; }
 
 protected:
 	Vector3 vel;
