@@ -8,10 +8,12 @@ public:
 
 	void init();
 	void Uptade(double t);
+	void Shoot();
 
 
 private:
-	Particle* part;
+	std::vector<Particle*> particles;
+	
 
 };
 

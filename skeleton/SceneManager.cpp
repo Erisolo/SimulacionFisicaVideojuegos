@@ -1,21 +1,35 @@
 #include "SceneManager.h"
+#include "Proyectil.h"
 
 SceneManager::SceneManager()
 {}
 
 SceneManager::~SceneManager()
 {
-	delete part;
+	for (int i = 0; i < particles.size(); i++)
+	{
+		if (particles[i] != nullptr)
+			delete particles[i];
+	}
 }
 
 void SceneManager::init()
 {
 	//A METER COSAS VENGAAA
 
-	part = new Particle(Vector3(0,0,0), Vector3(0,10,0), Vector3(0, 10, 0), 0.98); //por ahora solo eso
+	
 }
 
 void SceneManager::Uptade(double t)
 {
-	part->Integrate(t);
+	for (int i = 0; i < particles.size(); i++)
+	{
+		if (particles[i] != nullptr)
+			particles[i]->Integrate(t);
+	}
+}
+
+void SceneManager::Shoot()
+{
+	particles.push_back(new Proyectil(Vector3(-20, 0, 0), Vector3(50, 30, 0), 0.98, 20000));
 }

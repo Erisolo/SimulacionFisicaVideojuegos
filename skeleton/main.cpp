@@ -109,8 +109,11 @@ void keyPress(unsigned char key, const PxTransform& camera)
 
 	switch(toupper(key))
 	{
-	//case 'B': break;
-	//case ' ':	break;
+	case 'P':
+	{
+		sceneManager->Shoot();
+		break;
+	}
 	case ' ':
 	{
 		break;
