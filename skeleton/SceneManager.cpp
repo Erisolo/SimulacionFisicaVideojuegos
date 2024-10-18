@@ -2,7 +2,9 @@
 #include "Proyectil.h"
 
 SceneManager::SceneManager()
-{}
+{
+	
+}
 
 SceneManager::~SceneManager()
 {
@@ -11,17 +13,20 @@ SceneManager::~SceneManager()
 		if (particles[i] != nullptr)
 			delete particles[i];
 	}
+	delete sistemaParticulas;
 }
 
 void SceneManager::init()
 {
-	//A METER COSAS VENGAAA
+	sistemaParticulas = new ParticleSystem(Vector3(0, 0, 0), MANGUERA);
 
 	
 }
 
 void SceneManager::Uptade(double t)
 {
+	sistemaParticulas->Update(t);
+
 	for (int i = 0; i < particles.size(); i++)
 	{
 		if (particles[i] != nullptr)
