@@ -1,5 +1,6 @@
 #include "SceneManager.h"
 #include "Proyectil.h"
+#include "GravityGenerator.h"
 
 SceneManager::SceneManager()
 {
@@ -13,30 +14,43 @@ SceneManager::~SceneManager()
 		if (particles[i] != nullptr)
 			delete particles[i];
 	}
-	delete sistemaParticulas;
+	for (int i = 0; i < forceGenerators.size(); i++)
+	{
+		if (forceGenerators[i] != nullptr)
+			delete forceGenerators[i];
+	}
+	//delete sistemaParticulas;
 }
 
 void SceneManager::init()
 {
-	sistemaParticulas = new ParticleSystem(Vector3(0, 0, 0), MANGUERA);
-
+	//sistemaParticulas = new ParticleSystem(Vector3(0, 0, 0), MANGUERA);
+	forceGenerators.push_back(new GravityGenerator(9.8));
+	particles.push_back(new Particle(Vector3(0, 50, 0), Vector3(0), Vector3(0), 5)); //particula de prueba
 	
 }
 
 void SceneManager::Uptade(double t)
 {
-	sistemaParticulas->Update(t);
+	//sistemaParticulas->Update(t);
 
 	for (int i = 0; i < particles.size(); i++)
 	{
 		if (particles[i] != nullptr)
 		{
 			particles[i]->Integrate(t);
-			if (particles[i]->hasTouchedGround())
+
+			for (int j = 0; j < forceGenerators.size(); j++) //we pass it to the generators to apply forces to
+			{
+				if (forceGenerators[i] != nullptr)
+					forceGenerators[i]->aplyForce(particles[i]);
+
+			}
+			/*if (particles[i]->hasTouchedGround())
 			{
 				delete particles[i];
 				particles[i] = nullptr;
-			}
+			}*/
 
 		}
 		

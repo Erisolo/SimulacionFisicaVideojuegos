@@ -1,6 +1,7 @@
 #pragma once
 //#include "Particle.h"
 #include "ParticleSystem.h"
+#include "ForceGenerator.h"
 class SceneManager
 {
 public:
@@ -15,7 +16,7 @@ public:
 private:
 	std::vector<Particle*> particles;
 	ParticleSystem* sistemaParticulas;
-	
+	std::vector<ForceGenerator*> forceGenerators;
 
 };
 

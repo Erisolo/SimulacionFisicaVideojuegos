@@ -9,8 +9,8 @@ class Particle
 {
 
 public:
-	Particle(Vector3 pos, Vector3 vel, Vector3 acc, double d);
-	Particle(Vector3 pos, Vector3 vel, Vector3 acc, double d, Vector4 col);
+	Particle(Vector3 pos, Vector3 vel, Vector3 acc, float m);
+	Particle(Vector3 pos, Vector3 vel, Vector3 acc, double lf, Vector4 col);
 	~Particle();
 
 	virtual void Integrate(double t);
@@ -19,11 +19,16 @@ public:
 	void changeColor(Vector4 color) { renderItem->color = color; }
 
 	inline bool alive() { return isAlive; }
+	void applyForce(Vector3 fc) { forces += fc; };
+	Vector3 getVel() { return vel; }
+	double getMass() { return myMass; }
 
 protected:
 	Vector3 vel;
 	Vector3 acc;
-	double damping;
+	Vector3 forces;
+	float myMass;
+	//double damping;
 	PxTransform Pose;
 	RenderItem* renderItem;
 	bool isAlive = true;
