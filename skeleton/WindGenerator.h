@@ -2,7 +2,7 @@
 #include "ForceGenerator.h"
 class WindGenerator: public ForceGenerator
 {
-private:
+protected:
 	Vector3 center; float radiousOfInfluenceSquared;
 	Vector3 windSpeed;
 	float windResistence;
@@ -10,7 +10,7 @@ private:
 public:
 
 	WindGenerator(Vector3 vel, float Wi, Vector3 cntr, float roi);
-	void aplyForce(Particle* p) override;
+	virtual void aplyForce(Particle* p) override;
 
 };
 

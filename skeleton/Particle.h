@@ -10,7 +10,7 @@ class Particle
 
 public:
 	Particle(Vector3 pos, Vector3 vel, Vector3 acc, float m);
-	Particle(Vector3 pos, Vector3 vel, Vector3 acc, double lf, Vector4 col);
+	Particle(Vector3 pos, Vector3 vel, Vector3 acc, double lf, Vector4 col, float m);
 	~Particle();
 
 	virtual void Integrate(double t);

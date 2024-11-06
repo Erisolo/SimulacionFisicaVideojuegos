@@ -2,6 +2,7 @@
 #include <random>
 #include <ostream>
 #include <istream>
+#include "ForceGenerator.h"
 
 void ParticleSystem::deleteParticles()
 {
@@ -70,7 +71,7 @@ Particle* ParticleSystem::generateParticle()
 	pos.z += normal_dist(seed) * posFac.z;
 
 
-	return new Particle(pos, vel, {0, -10, 0}, lifeTime, Vector4(1,1,1,1));
+	return new Particle(pos, vel, Vector3(0), lifeTime, Vector4(1, 1, 1, 1), 5);
 }
 
 void ParticleSystem::asignateSystem(GenerationSystems g)
@@ -99,7 +100,7 @@ void ParticleSystem::asignateSystem(GenerationSystems g)
 		meanVel = { -30, 60, -100};
 		velFac = {5, 5, 5 };
 		posFac = { 2, 0, 2};
-		lifeTime = 3;
+		lifeTime = 4;
 		maxNumofParts = 1000;
 		framerate = 0.001;
 		constantGen = true;
@@ -146,4 +147,16 @@ void ParticleSystem::Update(double t)
 	
 	updateParticles(t);
 	deleteDeadParticles();
+}
+
+void ParticleSystem::aplyForceGenerator(ForceGenerator* fg)
+{
+	for (int i = 0; i < particles.size(); i++)
+	{
+		if (particles[i] != nullptr)
+		{
+			fg->aplyForce(particles[i]);
+		}
+	}
+
 }

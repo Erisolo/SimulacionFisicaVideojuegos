@@ -3,6 +3,8 @@
 #include <vector>
 #include <random>
 
+class ForceGenerator;
+
 enum GenerationSystems
 {
 	RAIN, EXPLOSION, FIREWORKS, MANGUERA
@@ -35,6 +37,8 @@ public:
 	ParticleSystem(Vector3 initPos, GenerationSystems g);
 
 	void Update(double t);
+
+	void aplyForceGenerator(ForceGenerator* fg);
 
 
 
