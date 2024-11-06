@@ -1,6 +1,7 @@
 #include "SceneManager.h"
 #include "Proyectil.h"
 #include "GravityGenerator.h"
+#include "WindGenerator.h"
 
 SceneManager::SceneManager()
 {
@@ -26,6 +27,7 @@ void SceneManager::init()
 {
 	//sistemaParticulas = new ParticleSystem(Vector3(0, 0, 0), MANGUERA);
 	forceGenerators.push_back(new GravityGenerator(9.8));
+	forceGenerators.push_back(new WindGenerator(Vector3(50, 0, -50), 0.7, Vector3(0), 100));
 	particles.push_back(new Particle(Vector3(0, 50, 0), Vector3(0), Vector3(0), 5)); //particula de prueba
 	
 }
@@ -42,8 +44,8 @@ void SceneManager::Uptade(double t)
 
 			for (int j = 0; j < forceGenerators.size(); j++) //we pass it to the generators to apply forces to
 			{
-				if (forceGenerators[i] != nullptr)
-					forceGenerators[i]->aplyForce(particles[i]);
+				if (forceGenerators[j] != nullptr)
+					forceGenerators[j]->aplyForce(particles[i]);
 
 			}
 			/*if (particles[i]->hasTouchedGround())

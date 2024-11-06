@@ -19,9 +19,10 @@ public:
 	void changeColor(Vector4 color) { renderItem->color = color; }
 
 	inline bool alive() { return isAlive; }
-	void applyForce(Vector3 fc) { forces += fc; };
+	void applyForce(Vector3 fc);
 	Vector3 getVel() { return vel; }
 	double getMass() { return myMass; }
+	Vector3 getPos() { return Pose.p; }
 
 protected:
 	Vector3 vel;

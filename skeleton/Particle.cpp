@@ -53,3 +53,8 @@ void Particle::ChangeAcceleration(Vector3 acc_)
 {
 	acc = acc_;
 }
+
+void Particle::applyForce(Vector3 fc)
+{
+	forces += fc; 
+}
