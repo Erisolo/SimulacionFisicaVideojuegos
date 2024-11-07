@@ -12,5 +12,6 @@ public:
 	virtual void aplyForce(Particle* p, double dt) = 0;
 	virtual void Update(std::vector<Particle*> &ps, double dt);
 
+	bool isAlive() { return alive; }
 };
 

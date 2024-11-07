@@ -17,4 +17,7 @@ void ExplosionGenerator::Update(std::vector<Particle*>& ps, double dt)
 {
 	time += dt;
 	ForceGenerator::Update(ps, dt);
+
+	if (time > 4.6*tau) //cuando la sea menor q el 1%
+		alive = false;
 }

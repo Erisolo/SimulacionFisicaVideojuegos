@@ -71,7 +71,7 @@ Particle* ParticleSystem::generateParticle()
 	pos.z += normal_dist(seed) * posFac.z;
 
 
-	return new Particle(pos, vel, lifeTime, Vector4(1, 1, 1, 1), 5);
+	return new Particle(pos, vel, lifeTime, Vector4(1, 1, 1, 1), 1);
 }
 
 void ParticleSystem::asignateSystem(GenerationSystems g)
@@ -79,11 +79,11 @@ void ParticleSystem::asignateSystem(GenerationSystems g)
 	switch (g)
 	{
 	case RAIN:
-		meanVel = {0, -10, 0};
+		meanVel = {0, -50, 0};
 		velFac = { 0, 5, 0 };
 		posFac = { 15, 0, 15 };
 		lifeTime = 400;
-		maxNumofParts = 100;
+		maxNumofParts = 200;
 		framerate = 0.1;
 		constantGen = true;
 		break;
@@ -153,7 +153,8 @@ void ParticleSystem::aplyForceGenerators(std::vector<ForceGenerator*> &fg)
 {
 	for (int i = 0; i < fg.size(); i++)
 	{
-		fg[i]->Update(particles, 0); //para no cambiar el tiempo
+		if(fg[i] != nullptr)
+			fg[i]->Update(particles, 0); //para no cambiar el tiempo
 	}
 
 }

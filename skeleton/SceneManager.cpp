@@ -26,11 +26,11 @@ SceneManager::~SceneManager()
 
 void SceneManager::init()
 {
-	//sistemaParticulas.push_back(new ParticleSystem(Vector3(0, 0, 0), MANGUERA));
-	//forceGenerators.push_back(new GravityGenerator(9.8));
+	sistemaParticulas.push_back(new ParticleSystem(Vector3(0, 90, 0), RAIN));
+	forceGenerators.push_back(new GravityGenerator(9.8));
 	//forceGenerators.push_back(new TorbellinoGenerator(0.7, Vector3(0), 500, 12));
-	forceGenerators.push_back(new ExplosionGenerator(Vector3(0, 0, 0), 700, 500));
-	particles.push_back(new Particle(Vector3(0, 20, 0), Vector3(0), 1)); //particula de prueba
+	//forceGenerators.push_back(new ExplosionGenerator(Vector3(0, 0, 0), 700, 500));
+	//particles.push_back(new Particle(Vector3(0, 20, 0), Vector3(0), 1)); //particula de prueba
 	
 }
 
@@ -42,6 +42,7 @@ void SceneManager::Uptade(double t)
 		{
 			sistemaParticulas[i]->Update(t);
 			sistemaParticulas[i]->aplyForceGenerators(forceGenerators);
+			//eliminar si se muere
 
 		}
 			
@@ -52,6 +53,12 @@ void SceneManager::Uptade(double t)
 		if (forceGenerators[i] != nullptr)
 		{
 			forceGenerators[i]->Update(particles, t);
+			if (!forceGenerators[i]->isAlive())
+			{
+				delete forceGenerators[i];
+				forceGenerators[i] = nullptr;
+			}
+
 		}
 
 	}
@@ -62,6 +69,7 @@ void SceneManager::Uptade(double t)
 		if (particles[i] != nullptr)
 		{
 			particles[i]->Integrate(t);
+			//eliminar si se muere
 
 		}
 		
@@ -72,11 +80,11 @@ void SceneManager::Shoot(char c, Vector3 pos)
 {
 	switch (c)
 	{
-	case 'P': //proyectil normla
-	{
-		particles.push_back(new Proyectil(pos, Vector3(-50, 10, -50), 0.98, 20000));
-		break;
-	}
+	//case 'P': //proyectil normla
+	//{
+	//	particles.push_back(new Proyectil(pos, Vector3(-50, 10, -50), 0.98, 20000));
+	//	break;
+	//}
 	case 'G': //globo
 	{
 		particles.push_back(new Proyectil(pos, Vector3(-20, 0, -20), 0.98, 2, Vector3(0, -2, 0)));
@@ -91,6 +99,10 @@ void SceneManager::Shoot(char c, Vector3 pos)
 	{
 		particles.push_back(new Proyectil(pos - Vector3(10), Vector3(-5, 20, -5), 0.98, 2000));
 		break;
+	}
+	case 'P':	//plosion
+	{
+		forceGenerators.push_back(new ExplosionGenerator(Vector3(0, 0, 0), 100000, 100));
 	}
 
 
