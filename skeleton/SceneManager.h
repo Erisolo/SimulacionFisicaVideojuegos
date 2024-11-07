@@ -12,10 +12,14 @@ public:
 	void Uptade(double t);
 	void Shoot(char c, Vector3 pos);
 
+	void deleteForceGenerator(int i);
+	void deleteParticle(int i);
+	void deleteParticleSystem(int i);
+
 
 private:
 	std::vector<Particle*> particles;
-	ParticleSystem* sistemaParticulas;
+	std::vector<ParticleSystem*> sistemaParticulas;
 	std::vector<ForceGenerator*> forceGenerators;
 
 };
