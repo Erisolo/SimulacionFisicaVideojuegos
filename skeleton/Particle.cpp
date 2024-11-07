@@ -29,9 +29,13 @@ Particle::~Particle()
 
 void Particle::Integrate(double dt)
 {
-	acc = forces/myMass;
-	
-	vel = vel + acc * dt; //aqui para acelerar
+	if (forces != Vector3(0))
+	{
+		acc = forces / myMass;
+		vel = vel + acc * dt; //aqui para acelerar
+
+	}
+		
 	Pose.p = Pose.p + vel * dt;
 	
 	/*vel = vel * pow(damping, dt);*/

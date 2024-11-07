@@ -7,7 +7,8 @@ void ExplosionGenerator::aplyForce(Particle* p, double dt)
 
 	if ( r < radiousSquared)
 	{
-		Vector3 force = (ppos - center) * (intesity / r) * exp(-dt/tau);
+		Vector3 force = (ppos - center) * (intesity / r) *exp(-time / tau);
+		p->applyForce(force);
 	}
 
 }

@@ -2,6 +2,7 @@
 #include "Proyectil.h"
 #include "GravityGenerator.h"
 #include "TorbellinoGenerator.h"
+#include "ExplosionGenerator.h"
 
 SceneManager::SceneManager()
 {
@@ -25,10 +26,11 @@ SceneManager::~SceneManager()
 
 void SceneManager::init()
 {
-	sistemaParticulas.push_back(new ParticleSystem(Vector3(0, 0, 0), MANGUERA));
+	//sistemaParticulas.push_back(new ParticleSystem(Vector3(0, 0, 0), MANGUERA));
 	//forceGenerators.push_back(new GravityGenerator(9.8));
-	forceGenerators.push_back(new TorbellinoGenerator(0.7, Vector3(0), 500, 12));
-	//particles.push_back(new Particle(Vector3(0, 20, 50), Vector3(0), Vector3(0), 5)); //particula de prueba
+	//forceGenerators.push_back(new TorbellinoGenerator(0.7, Vector3(0), 500, 12));
+	forceGenerators.push_back(new ExplosionGenerator(Vector3(0, 0, 0), 700, 500));
+	particles.push_back(new Particle(Vector3(0, 20, 0), Vector3(0), 1)); //particula de prueba
 	
 }
 
