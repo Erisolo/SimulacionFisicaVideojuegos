@@ -5,7 +5,7 @@ WindGenerator::WindGenerator(Vector3 vel, float Wi, Vector3 cntr, float roi) : F
 	radiousOfInfluenceSquared = pow(roi, 2);
 }
 
-void WindGenerator::aplyForce(Particle* p)
+void WindGenerator::aplyForce(Particle* p, double dt)
 {
 	if ((p->getPos() - center).magnitudeSquared() < radiousOfInfluenceSquared)
 	{

@@ -36,10 +36,23 @@ void SceneManager::Uptade(double t)
 {
 	for (int i = 0; i < sistemaParticulas.size(); i++)
 	{
-		if(sistemaParticulas[i] != nullptr)
+		if (sistemaParticulas[i] != nullptr)
+		{
 			sistemaParticulas[i]->Update(t);
+			sistemaParticulas[i]->aplyForceGenerators(forceGenerators);
+
+		}
+			
 	}
 	
+	for (int i = 0; i < forceGenerators.size(); i++)
+	{
+		if (forceGenerators[i] != nullptr)
+		{
+			forceGenerators[i]->Update(particles, t);
+		}
+
+	}
 
 
 	for (int i = 0; i < particles.size(); i++)
@@ -47,12 +60,6 @@ void SceneManager::Uptade(double t)
 		if (particles[i] != nullptr)
 		{
 			particles[i]->Integrate(t);
-
-			for (int j = 0; j < forceGenerators.size(); j++) //we pass it to the generators to apply forces to
-			{
-				if (forceGenerators[j] != nullptr)
-					forceGenerators[j]->aplyForce(particles[i], t);
-			}
 
 		}
 		
@@ -89,22 +96,4 @@ void SceneManager::Shoot(char c, Vector3 pos)
 		break;
 	}
 	
-}
-
-void SceneManager::deleteForceGenerator(int i)
-{
-	delete forceGenerators[i];
-	forceGenerators[i] = nullptr;
-}
-
-void SceneManager::deleteParticle(int i)
-{
-	delete particles[i];
-	particles[i] = nullptr;
-}
-
-void SceneManager::deleteParticleSystem(int i)
-{
-	delete sistemaParticulas[i];
-	sistemaParticulas[i] = nullptr;
 }

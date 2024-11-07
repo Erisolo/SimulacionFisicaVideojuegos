@@ -10,7 +10,7 @@ protected:
 public:
 
 	WindGenerator(Vector3 vel, float Wi, Vector3 cntr, float roi);
-	virtual void aplyForce(Particle* p) override;
+	virtual void aplyForce(Particle* p, double dt) override;
 
 };
 

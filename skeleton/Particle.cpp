@@ -1,7 +1,7 @@
 #include "Particle.h"
 #include <cmath>
 
-Particle::Particle(Vector3 pos, Vector3 Vel, Vector3 acc_, float m): vel(Vel), acc(acc_), myMass(m)
+Particle::Particle(Vector3 pos, Vector3 Vel, float m): vel(Vel), myMass(m)
 {
 	forces = Vector3(0);
 	Pose = PxTransform(pos);
@@ -10,7 +10,7 @@ Particle::Particle(Vector3 pos, Vector3 Vel, Vector3 acc_, float m): vel(Vel), a
 	
 }
 
-Particle::Particle(Vector3 pos, Vector3 vel, Vector3 acc, double lf, Vector4 col, float m): vel(vel), acc(acc), lifeTime(lf)
+Particle::Particle(Vector3 pos, Vector3 vel, double lf, Vector4 col, float m): vel(vel), lifeTime(lf)
 {
 	myMass = m;
 	forces = Vector3(0);

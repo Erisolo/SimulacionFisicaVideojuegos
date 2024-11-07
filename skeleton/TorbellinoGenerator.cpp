@@ -4,11 +4,11 @@ TorbellinoGenerator::TorbellinoGenerator( float Wi, Vector3 cntr, float roi, flo
 {
 }
 
-void TorbellinoGenerator::aplyForce(Particle* p)
+void TorbellinoGenerator::aplyForce(Particle* p, double dt)
 {
 	Vector3 posp = p->getPos();
 	windSpeed = Vector3(-posp.z - center.z, 50 - (posp.y - center.y), posp.x - center.x) * huracaneIntensity;
 
-	WindGenerator::aplyForce(p);
+	WindGenerator::aplyForce(p, dt);
 
 }

@@ -11,3 +11,9 @@ void ExplosionGenerator::aplyForce(Particle* p, double dt)
 	}
 
 }
+
+void ExplosionGenerator::Update(std::vector<Particle*>& ps, double dt)
+{
+	time += dt;
+	ForceGenerator::Update(ps, dt);
+}

@@ -4,15 +4,13 @@ class SceneManager;
 class ForceGenerator
 {
 protected:
-	int id;
-	SceneManager* mngr;
+	bool alive = true;
 
 public:
 
-	ForceGenerator(int i, SceneManager* sm): id(i), mngr(sm) {};
+	ForceGenerator() {};
 	virtual void aplyForce(Particle* p, double dt) = 0;
-	virtual void Update(std::vector<Particle*> ps, double dt) = 0;
-	virtual void stop();
+	virtual void Update(std::vector<Particle*> &ps, double dt);
 
 };
 

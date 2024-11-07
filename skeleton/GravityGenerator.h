@@ -7,6 +7,6 @@ private:
 
 public:
 	GravityGenerator(float accSpeed);
-	void  aplyForce(Particle* p) override;
+	void  aplyForce(Particle* p, double dt) override;
 };
 

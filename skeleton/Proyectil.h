@@ -8,7 +8,7 @@ private:
 	float masa;
 
 public:
-	Proyectil(Vector3 pos, Vector3 vel, double d, double m, Vector3 g = { 0,9.8, 0 }) : Particle(pos, vel, Vector3(0), d), masa(m), gravedad(g)
+	Proyectil(Vector3 pos, Vector3 vel, double d, double m, Vector3 g = {0, -9.8, 0}) : Particle(pos, vel, 5), masa(m), gravedad(g)
 	{
 		Pose = PxTransform(pos);
 

@@ -71,7 +71,7 @@ Particle* ParticleSystem::generateParticle()
 	pos.z += normal_dist(seed) * posFac.z;
 
 
-	return new Particle(pos, vel, Vector3(0), lifeTime, Vector4(1, 1, 1, 1), 5);
+	return new Particle(pos, vel, lifeTime, Vector4(1, 1, 1, 1), 5);
 }
 
 void ParticleSystem::asignateSystem(GenerationSystems g)
@@ -149,14 +149,11 @@ void ParticleSystem::Update(double t)
 	deleteDeadParticles();
 }
 
-void ParticleSystem::aplyForceGenerator(ForceGenerator* fg)
+void ParticleSystem::aplyForceGenerators(std::vector<ForceGenerator*> &fg)
 {
-	for (int i = 0; i < particles.size(); i++)
+	for (int i = 0; i < fg.size(); i++)
 	{
-		if (particles[i] != nullptr)
-		{
-			fg->aplyForce(particles[i]);
-		}
+		fg[i]->Update(particles, 0); //para no cambiar el tiempo
 	}
 
 }

@@ -12,6 +12,7 @@ enum GenerationSystems
 class ParticleSystem
 {
 private:
+	bool alive = true;
 	Vector3 fuente;
 	std::vector<Particle*> particles;
 	int actNumOfParts = 0;
@@ -38,7 +39,7 @@ public:
 
 	void Update(double t);
 
-	void aplyForceGenerator(ForceGenerator* fg);
+	void aplyForceGenerators(std::vector<ForceGenerator*>& fg);
 
 
 
