@@ -10,7 +10,7 @@ public:
 
 	ForceGenerator() {};
 	virtual void aplyForce(Particle* p, double dt) = 0;
-	virtual void Update(std::vector<Particle*> &ps, double dt);
+	virtual void Update(std::vector<Particle*> &ps, double dt = 0);
 
 	bool isAlive() { return alive; }
 };

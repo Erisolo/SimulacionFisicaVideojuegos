@@ -82,9 +82,9 @@ void ParticleSystem::asignateSystem(GenerationSystems g)
 		meanVel = {0, -50, 0};
 		velFac = { 0, 5, 0 };
 		posFac = { 15, 0, 15 };
-		lifeTime = 400;
-		maxNumofParts = 200;
-		framerate = 0.1;
+		lifeTime = 10;
+		maxNumofParts = 500;
+		framerate = 0.01;
 		constantGen = true;
 		break;
 	case EXPLOSION:
@@ -123,6 +123,11 @@ ParticleSystem::ParticleSystem(Vector3 initPos, GenerationSystems g)
 	
 	initSystem(g);
 
+}
+
+ParticleSystem::~ParticleSystem()
+{
+	deleteParticles();
 }
 
 void ParticleSystem::initSystem(GenerationSystems g)

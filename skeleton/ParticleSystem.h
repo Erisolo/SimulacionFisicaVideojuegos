@@ -11,12 +11,19 @@ enum GenerationSystems
 };
 class ParticleSystem
 {
-private:
+protected:
 	bool alive = true;
-	Vector3 fuente;
 	std::vector<Particle*> particles;
 	int actNumOfParts = 0;
 	int maxNumofParts;
+	void deleteDeadParticles();
+	void deleteParticles();
+
+	void updateParticles(double t);
+
+
+private:
+	Vector3 fuente;
 	double lifeTime;
 	double framerate, actTime = 0;
 	std::mt19937 seed;
@@ -25,23 +32,18 @@ private:
 
 	Vector3 meanVel, velFac, posFac;
 
-
-	void deleteParticles();
-	void deleteDeadParticles();
 	void addParticle();
-	void updateParticles(double t);
 	Particle* generateParticle();
 	void asignateSystem(GenerationSystems g);
 	void initSystem(GenerationSystems g);
 
 public:
 	ParticleSystem(Vector3 initPos, GenerationSystems g);
+	ParticleSystem() {};
+	virtual ~ParticleSystem();
 
-	void Update(double t);
+	virtual void Update(double t);
 
-	void aplyForceGenerators(std::vector<ForceGenerator*>& fg);
-
-
-
+	virtual void aplyForceGenerators(std::vector<ForceGenerator*>& fg);
 };
 

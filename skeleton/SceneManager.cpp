@@ -102,7 +102,7 @@ void SceneManager::Shoot(char c, Vector3 pos)
 	}
 	case 'P':	//plosion
 	{
-		forceGenerators.push_back(new ExplosionGenerator(Vector3(0, 0, 0), 100000, 100));
+		forceGenerators.push_back(new ExplosionGenerator(Vector3(0, 0, 0), 1600000, 50, 1));
 	}
 
 

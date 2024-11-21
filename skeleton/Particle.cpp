@@ -40,7 +40,7 @@ void Particle::Integrate(double dt)
 	
 	/*vel = vel * pow(damping, dt);*/
 
-	if (isAlive)
+	if (lifeTime > 0)	//se comprueba solo si tiene lifetime
 	{
 		lifeTime -= dt;
 		isAlive = lifeTime > 0;
