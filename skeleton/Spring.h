@@ -9,7 +9,8 @@ private:
 	//cosas de particle system
 
 public:
-	Spring(Vector3 pos1, Vector3 pos2); //crea sus propias particulas a la distancia q quieres
+	Spring(Vector3 pos1, Vector3 pos2, float k = 70); //crea sus propias particulas a la distancia q quieres
+	Spring(Particle* p1, Particle* p2, float K);
 
 	void attatchParticle(Particle* p);
 	void deatatchParticle(Particle* p);

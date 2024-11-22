@@ -2,6 +2,7 @@
 //#include "Particle.h"
 #include "ParticleSystem.h"
 #include "ForceGenerator.h"
+class Spring;
 class SceneManager
 {
 public:
@@ -18,5 +19,6 @@ private:
 	std::vector<ParticleSystem*> sistemaParticulas;
 	std::vector<ForceGenerator*> forceGenerators;
 
+	Spring* spring;
 };
 

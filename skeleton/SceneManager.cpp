@@ -3,7 +3,7 @@
 #include "GravityGenerator.h"
 #include "TorbellinoGenerator.h"
 #include "ExplosionGenerator.h"
-
+#include "Spring.h"
 SceneManager::SceneManager()
 {
 	
@@ -26,8 +26,10 @@ SceneManager::~SceneManager()
 
 void SceneManager::init()
 {
-	sistemaParticulas.push_back(new ParticleSystem(Vector3(0, 90, 0), RAIN));
+	//sistemaParticulas.push_back(new ParticleSystem(Vector3(0, 90, 0), RAIN));
 	forceGenerators.push_back(new GravityGenerator(9.8));
+	spring = new Spring(Vector3(0.0), Vector3(0, 50, 0));
+	sistemaParticulas.push_back(spring);
 	//forceGenerators.push_back(new TorbellinoGenerator(0.7, Vector3(0), 500, 12));
 	//forceGenerators.push_back(new ExplosionGenerator(Vector3(0, 0, 0), 700, 500));
 	//particles.push_back(new Particle(Vector3(0, 20, 0), Vector3(0), 1)); //particula de prueba
@@ -85,24 +87,29 @@ void SceneManager::Shoot(char c, Vector3 pos)
 	//	particles.push_back(new Proyectil(pos, Vector3(-50, 10, -50), 0.98, 20000));
 	//	break;
 	//}
-	case 'G': //globo
-	{
-		particles.push_back(new Proyectil(pos, Vector3(-20, 0, -20), 0.98, 2, Vector3(0, -2, 0)));
-		break;
-	}
-	case 'B': //bala
-	{
-		particles.push_back(new Proyectil(pos, Vector3(-120, 0, -120), 0.98, 2000));
-		break;
-	}
-	case 'V': //vertical
-	{
-		particles.push_back(new Proyectil(pos - Vector3(10), Vector3(-5, 20, -5), 0.98, 2000));
-		break;
-	}
+	//case 'G': //globo
+	//{
+	//	particles.push_back(new Proyectil(pos, Vector3(-20, 0, -20), 0.98, 2, Vector3(0, -2, 0)));
+	//	break;
+	//}
+	//case 'B': //bala
+	//{
+	//	particles.push_back(new Proyectil(pos, Vector3(-120, 0, -120), 0.98, 2000));
+	//	break;
+	//}
+	//case 'V': //vertical
+	//{
+	//	particles.push_back(new Proyectil(pos - Vector3(10), Vector3(-5, 20, -5), 0.98, 2000));
+	//	break;
+	//}
 	case 'P':	//plosion
 	{
 		forceGenerators.push_back(new ExplosionGenerator(Vector3(0, 0, 0), 1600000, 50, 1));
+		break;
+	}
+	case 'm':
+	{
+		spring->changeK(400);
 	}
 
 
