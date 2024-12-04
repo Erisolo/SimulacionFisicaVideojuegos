@@ -5,6 +5,8 @@ void BuoyancyForceGenerator::aplyForce(Particle* p, double dt)
 	float h = p->getPos().y;
 	float h0 = waterline->getPos().y;
 	Vector3 force = Vector3(0.0);
+
+
 	float immersed = 0.0;
 
 	if (h - h0 > height * 0.5) {
@@ -21,6 +23,5 @@ void BuoyancyForceGenerator::aplyForce(Particle* p, double dt)
 
 	force.y = density * volume * immersed * 9.8;
 	p->applyForce(force);
-	waterline->applyForce(-force);
 
 }

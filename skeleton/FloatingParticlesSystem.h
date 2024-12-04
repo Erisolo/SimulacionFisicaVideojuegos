@@ -9,9 +9,9 @@ private:
 	BuoyancyForceGenerator* waterForceGenerator;
 
 public:
-	FloatingParticlesSystem(Vector3 waterline, float density, float volume); 
+	FloatingParticlesSystem(Vector3 waterline, float density);
 
-	void attatchParticle(Particle* p);
+	void attatchParticle(Particle* p, float height, float volume);
 	void deatatchParticle() { particles[0] = nullptr; }
 	//SOLO PUEDE TENER UN LIQUIDO SUMERGIDO
 	Particle* getAtatchedParticle() { return particles[0]; }

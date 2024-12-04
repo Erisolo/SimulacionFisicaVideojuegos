@@ -40,10 +40,10 @@ void SceneManager::init()
 	sistemaParticulas.push_back(s3);
 	sistemaParticulas.push_back(s4);*/
 
-	FloatingParticlesSystem* f = new FloatingParticlesSystem(Vector3(0, 40, 0), 1000, 50);
+	FloatingParticlesSystem* f = new FloatingParticlesSystem(Vector3(0, 40, 0), 1000);
 	sistemaParticulas.push_back(f);
-	Particle* floaty = new SquareParticle(Vector3(0, 60, 0), Vector3(0.0), 5, 2, 2, 2);
-	f->attatchParticle(floaty);
+	Particle* floaty = new SquareParticle(Vector3(0, 50, 0), Vector3(0.0), 15, 2, 2, 2);
+	f->attatchParticle(floaty, 4, 16);
 
 	//forceGenerators.push_back(new TorbellinoGenerator(0.7, Vector3(0), 500, 12));
 	//forceGenerators.push_back(new ExplosionGenerator(Vector3(0, 0, 0), 700, 500));
