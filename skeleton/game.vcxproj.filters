@@ -53,7 +53,9 @@
     <ClCompile Include="Spring.cpp">
       <Filter>ParticleSystems</Filter>
     </ClCompile>
-    <ClCompile Include="SolidsSystem.cpp" />
+    <ClCompile Include="SolidsSystem.cpp">
+      <Filter>ParticleSystems</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core.hpp" />
@@ -108,7 +110,9 @@
     <ClInclude Include="Spring.h">
       <Filter>ParticleSystems</Filter>
     </ClInclude>
-    <ClInclude Include="SolidsSystem.h" />
+    <ClInclude Include="SolidsSystem.h">
+      <Filter>ParticleSystems</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Render">

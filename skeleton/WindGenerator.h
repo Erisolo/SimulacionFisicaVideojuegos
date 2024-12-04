@@ -11,6 +11,7 @@ public:
 
 	WindGenerator(Vector3 vel, float Wi, Vector3 cntr, float roi);
 	virtual void aplyForce(Particle* p, double dt) override;
+	virtual void aplyForce(RigidSolid* p, double dt) override;
 
 };
 

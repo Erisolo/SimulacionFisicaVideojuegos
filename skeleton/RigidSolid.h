@@ -11,7 +11,7 @@ class RigidSolid
 private:
 	bool isAlive = true;
 	PxRigidDynamic* body;
-	PxTransform* trans;
+	PxTransform trans;
 	RenderItem* renderItem;
 	float lifeTime;
 
@@ -24,6 +24,9 @@ public:
 	inline bool alive() noexcept { return isAlive; }
 	void update(double dt);
 	void applyForce(Vector3 fc);
+
+	Vector3 getPos();
+	Vector3 getVel();
 
 
 };

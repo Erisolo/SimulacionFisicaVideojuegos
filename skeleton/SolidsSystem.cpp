@@ -144,6 +144,11 @@ void SolidsSystem::Update(double t)
 
 void SolidsSystem::aplyForceGenerators(std::vector<ForceGenerator*>& fg)
 {
+	for (int i = 0; i < fg.size(); i++)
+	{
+		if (fg[i] != nullptr)
+			fg[i]->Update(solids, 0); //para no cambiar el tiempo
+	}
 }
 
 void SolidsSystem::updateSolids(double t)

@@ -52,6 +52,7 @@ void SceneManager::init()
 
 	//the force generators
 	// forceGenerators.push_back(new GravityGenerator(9.8));
+	forceGenerators.push_back(new WindGenerator(Vector3(-100, 0, 100), 0.7, Vector3(0.0), 500));
 	//forceGenerators.push_back(new TorbellinoGenerator(0.7, Vector3(0), 500, 12));
 	//forceGenerators.push_back(new ExplosionGenerator(Vector3(0, 0, 0), 700, 500));
 	//particles.push_back(new Particle(Vector3(0, 20, 0), Vector3(0), 1)); //particula de prueba
@@ -83,6 +84,7 @@ void SceneManager::Uptade(double t)
 		if (forceGenerators[i] != nullptr)
 		{
 			forceGenerators[i]->Update(particles, t);
+			forceGenerators[i]->Update(solids);
 			if (!forceGenerators[i]->isAlive())
 			{
 				delete forceGenerators[i];
@@ -109,7 +111,7 @@ void SceneManager::Uptade(double t)
 		if (solidSystems[i] != nullptr)
 		{
 			solidSystems[i]->Update(t);
-			//solidSystems[i]->aplyForceGenerators(forceGenerators);
+			solidSystems[i]->aplyForceGenerators(forceGenerators);
 
 		}
 

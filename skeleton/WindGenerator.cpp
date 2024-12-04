@@ -14,3 +14,13 @@ void WindGenerator::aplyForce(Particle* p, double dt)
 
 	}
 }
+
+void WindGenerator::aplyForce(RigidSolid* p, double dt)
+{
+	if ((p->getPos() - center).magnitudeSquared() < radiousOfInfluenceSquared)
+	{
+		Vector3 force = windResistence * (windSpeed - p->getVel());
+		p->applyForce(force);
+
+	}
+}

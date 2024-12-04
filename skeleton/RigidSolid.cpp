@@ -3,7 +3,8 @@
 RigidSolid::RigidSolid(std::string sh, PxScene* s, PxPhysics* gP, Vector3 pos, Vector3 vel, Vector4 col, Vector3 size, float mass, float t)
 {
 	//we create the rigid
-	body = gP->createRigidDynamic(PxTransform(pos));
+	trans = PxTransform(pos);
+	body = gP->createRigidDynamic(trans);
 	body->setLinearVelocity(vel);
 
 	//we create the shape
@@ -64,4 +65,15 @@ void RigidSolid::update(double dt)
 
 void RigidSolid::applyForce(Vector3 fc)
 {
+	body->addForce(fc);
+}
+
+Vector3 RigidSolid::getPos()
+{
+	return (body->getGlobalPose().p);
+}
+
+Vector3 RigidSolid::getVel()
+{
+	return body->getLinearVelocity();
 }
