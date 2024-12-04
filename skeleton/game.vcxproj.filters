@@ -10,21 +10,49 @@
     <ClCompile Include="RenderUtils.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="callbacks.cpp" />
-    <ClCompile Include="Particle.cpp" />
     <ClCompile Include="SceneManager.cpp" />
-    <ClCompile Include="Proyectil.cpp" />
-    <ClCompile Include="ParticleSystem.cpp" />
-    <ClCompile Include="ForceGenerator.cpp" />
-    <ClCompile Include="GravityGenerator.cpp" />
-    <ClCompile Include="WindGenerator.cpp" />
-    <ClCompile Include="TorbellinoGenerator.cpp" />
-    <ClCompile Include="ExplosionGenerator.cpp" />
-    <ClCompile Include="SpringForceGenerator.cpp" />
-    <ClCompile Include="Spring.cpp" />
-    <ClCompile Include="SquareParticle.cpp" />
-    <ClCompile Include="BuoyancyForceGenerator.cpp" />
-    <ClCompile Include="FloatingParticlesSystem.cpp" />
-    <ClCompile Include="RigidSolid.cpp" />
+    <ClCompile Include="FloatingParticlesSystem.cpp">
+      <Filter>ParticleSystems</Filter>
+    </ClCompile>
+    <ClCompile Include="ExplosionGenerator.cpp">
+      <Filter>ForceGenerators</Filter>
+    </ClCompile>
+    <ClCompile Include="BuoyancyForceGenerator.cpp">
+      <Filter>ForceGenerators</Filter>
+    </ClCompile>
+    <ClCompile Include="ForceGenerator.cpp">
+      <Filter>ForceGenerators</Filter>
+    </ClCompile>
+    <ClCompile Include="GravityGenerator.cpp">
+      <Filter>ForceGenerators</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleSystem.cpp">
+      <Filter>ParticleSystems</Filter>
+    </ClCompile>
+    <ClCompile Include="SpringForceGenerator.cpp">
+      <Filter>ForceGenerators</Filter>
+    </ClCompile>
+    <ClCompile Include="TorbellinoGenerator.cpp">
+      <Filter>ForceGenerators</Filter>
+    </ClCompile>
+    <ClCompile Include="WindGenerator.cpp">
+      <Filter>ForceGenerators</Filter>
+    </ClCompile>
+    <ClCompile Include="Particle.cpp">
+      <Filter>particlesAndSolids</Filter>
+    </ClCompile>
+    <ClCompile Include="Proyectil.cpp">
+      <Filter>particlesAndSolids</Filter>
+    </ClCompile>
+    <ClCompile Include="RigidSolid.cpp">
+      <Filter>particlesAndSolids</Filter>
+    </ClCompile>
+    <ClCompile Include="SquareParticle.cpp">
+      <Filter>particlesAndSolids</Filter>
+    </ClCompile>
+    <ClCompile Include="Spring.cpp">
+      <Filter>ParticleSystems</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core.hpp" />
@@ -36,25 +64,62 @@
     </ClInclude>
     <ClInclude Include="RenderUtils.hpp" />
     <ClInclude Include="callbacks.hpp" />
-    <ClInclude Include="Particle.h" />
     <ClInclude Include="SceneManager.h" />
-    <ClInclude Include="Proyectil.h" />
-    <ClInclude Include="ParticleSystem.h" />
-    <ClInclude Include="ForceGenerator.h" />
-    <ClInclude Include="GravityGenerator.h" />
-    <ClInclude Include="WindGenerator.h" />
-    <ClInclude Include="TorbellinoGenerator.h" />
-    <ClInclude Include="ExplosionGenerator.h" />
-    <ClInclude Include="SpringForceGenerator.h" />
-    <ClInclude Include="Spring.h" />
-    <ClInclude Include="SquareParticle.h" />
-    <ClInclude Include="BuoyancyForceGenerator.h" />
-    <ClInclude Include="FloatingParticlesSystem.h" />
-    <ClInclude Include="RigidSolid.h" />
+    <ClInclude Include="FloatingParticlesSystem.h">
+      <Filter>ParticleSystems</Filter>
+    </ClInclude>
+    <ClInclude Include="ExplosionGenerator.h">
+      <Filter>ForceGenerators</Filter>
+    </ClInclude>
+    <ClInclude Include="BuoyancyForceGenerator.h">
+      <Filter>ForceGenerators</Filter>
+    </ClInclude>
+    <ClInclude Include="ForceGenerator.h">
+      <Filter>ForceGenerators</Filter>
+    </ClInclude>
+    <ClInclude Include="GravityGenerator.h">
+      <Filter>ForceGenerators</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleSystem.h">
+      <Filter>ParticleSystems</Filter>
+    </ClInclude>
+    <ClInclude Include="SpringForceGenerator.h">
+      <Filter>ForceGenerators</Filter>
+    </ClInclude>
+    <ClInclude Include="TorbellinoGenerator.h">
+      <Filter>ForceGenerators</Filter>
+    </ClInclude>
+    <ClInclude Include="WindGenerator.h">
+      <Filter>ForceGenerators</Filter>
+    </ClInclude>
+    <ClInclude Include="Particle.h">
+      <Filter>particlesAndSolids</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyectil.h">
+      <Filter>particlesAndSolids</Filter>
+    </ClInclude>
+    <ClInclude Include="RigidSolid.h">
+      <Filter>particlesAndSolids</Filter>
+    </ClInclude>
+    <ClInclude Include="SquareParticle.h">
+      <Filter>particlesAndSolids</Filter>
+    </ClInclude>
+    <ClInclude Include="Spring.h">
+      <Filter>ParticleSystems</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Render">
       <UniqueIdentifier>{d04b4f9f-5a69-465e-8070-25c6d0bcd3c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ParticleSystems">
+      <UniqueIdentifier>{b7a58607-0f5d-40d1-8af6-5aaae762f57b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ForceGenerators">
+      <UniqueIdentifier>{85075a80-45d9-4586-b556-74d6c3e69b78}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="particlesAndSolids">
+      <UniqueIdentifier>{22fab906-b799-4e74-ae4d-2776000abd58}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
