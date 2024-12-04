@@ -23,6 +23,12 @@ SceneManager::~SceneManager()
 		if (forceGenerators[i] != nullptr)
 			delete forceGenerators[i];
 	}
+	for (int i = 0; i < sistemaParticulas.size(); i++)
+	{
+		if (sistemaParticulas[i] != nullptr)
+			delete sistemaParticulas[i];
+	}
+
 	//delete sistemaParticulas;
 }
 
@@ -38,19 +44,21 @@ void SceneManager::init()
 
 
 	//now setting the particles and stuff
-
 	//sistemaParticulas.push_back(new ParticleSystem(Vector3(0, 90, 0), RAIN));
-	forceGenerators.push_back(new GravityGenerator(9.8));
-
-	FloatingParticlesSystem* f = new FloatingParticlesSystem(Vector3(0, 40, 0), 1000);
+	/*FloatingParticlesSystem* f = new FloatingParticlesSystem(Vector3(0, 40, 0), 1000);
 	sistemaParticulas.push_back(f);
 	Particle* floaty = new SquareParticle(Vector3(0, 41, 0), Vector3(0.0), 15, 1, 1, 1);
-	f->attatchParticle(floaty, 2, 8);
+	f->attatchParticle(floaty, 2, 8);*/
 
+	//the force generators
+	// forceGenerators.push_back(new GravityGenerator(9.8));
 	//forceGenerators.push_back(new TorbellinoGenerator(0.7, Vector3(0), 500, 12));
 	//forceGenerators.push_back(new ExplosionGenerator(Vector3(0, 0, 0), 700, 500));
 	//particles.push_back(new Particle(Vector3(0, 20, 0), Vector3(0), 1)); //particula de prueba
 	
+	//rigids
+	solids.push_back(new RigidSolid("cube", scene, gPhysics, Vector3(0, 50, 0), Vector3(0), Vector4(8.9, 0, 3.2, 1), Vector3(5, 5, 5), 7));
+	solids.push_back(new RigidSolid("badCube", scene, gPhysics, Vector3(20, 50, 0), Vector3(0), Vector4(8.9, 0, 3.2, 1), Vector3(5, 5, 5), 7));
 }
 
 void SceneManager::Uptade(double t)

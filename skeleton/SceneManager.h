@@ -17,7 +17,7 @@ public:
 	void Uptade(double t);
 	void Shoot(char c, Vector3 pos);
 
-	void addNecesitiesForRigids(PxScene* s, PxPhysics* gP) { scene = s; gPhysics = gP; }
+	void addNecesitiesForRigids(PxScene* s, PxPhysics* gP) noexcept { scene = s; gPhysics = gP; }
 
 
 private:
