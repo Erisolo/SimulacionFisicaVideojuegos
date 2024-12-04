@@ -23,6 +23,7 @@ protected:
 
 
 private:
+	
 	Vector3 fuente;
 	double lifeTime;
 	double framerate, actTime = 0;

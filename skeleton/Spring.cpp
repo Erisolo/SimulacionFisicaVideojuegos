@@ -1,65 +1,37 @@
 #include "Spring.h"
 #include "SpringForceGenerator.h"
 //crea un muelle entre las dos posiciones, con una particula a cada extremo(de masa 5) y k = 20.
-Spring::Spring(Vector3 pos1, Vector3 pos2, float k)
+Spring::Spring(Vector3 pos1, Vector3 pos2, float k, bool sp, bool negf)
 {
+	staticSP = sp;
 	Particle* p = new Particle(pos1, Vector3(0), 5);
 
 	particles.push_back(new Particle(pos2, Vector3(0), 5));
 	
 	float len = (pos1 - pos2).normalize();
 
-	springForceGenerator = new SpringForceGenerator(p, k, len);
-
+	springForceGenerator = new SpringForceGenerator(p, k, len, sp, negf);
 
 }
 //crea un muelle entre las dos particulas, de distancia la q haya entre ellas.
-Spring::Spring(Particle* p1, Particle* p2, float K)
+Spring::Spring(Particle* p1, Particle* p2, float K, bool sp, bool negf)
 {
-
+	staticSP = sp;
 	float len = (p1->getPos() - p2->getPos()).normalize();
 	particles.push_back(p2);
 
-	springForceGenerator = new SpringForceGenerator(p1, K, len);
+	springForceGenerator = new SpringForceGenerator(p1, K, len, sp, negf);
 
 }
 void Spring::attatchParticle(Particle* p)
 {
-	if (actNumOfParts == particles.size())
-	{
-		int i = 0; bool added = false; //si hay algún spot libre
-		while (!added && i < particles.size())
-		{
-			if (particles[i] == nullptr)
-			{
-				particles[i] = p;
-				actNumOfParts++;
-				added = true;
-			}
-			i++;
-		}
-	}
-	else
-	{
-		particles.push_back(p);
-		actNumOfParts++;
-	}
+	particles[0] = p;
 	
 }
 
-void Spring::deatatchParticle(Particle* p)
+void Spring::deatatchParticle()
 {
-	int i = 0; bool deleted = false; //si hay algún spot libre
-	while (!deleted && i < particles.size())
-	{
-		if (particles[i] == p)
-		{
-			particles[i] = nullptr;
-			actNumOfParts--;
-			deleted= true;
-		}
-		i++;
-	}
+	particles[0] = nullptr;
 	
 }
 
@@ -70,7 +42,12 @@ void Spring::changeStartingPoint(Particle* p)
 
 void Spring::Update(double t)
 {
+	//siempre q el origen siga vivo, lo actualizamos todo
 	updateParticles(t);
+
+	if (!staticSP)
+		springForceGenerator->getStartPoint()->Integrate(t);
+
 	deleteDeadParticles();
 
 }
@@ -78,7 +55,19 @@ void Spring::Update(double t)
 void Spring::aplyForceGenerators(std::vector<ForceGenerator*>& fg)
 {
 	springForceGenerator->Update(particles);
-	ParticleSystem::aplyForceGenerators(fg);
+	
+	if (!staticSP)
+	{
+		particles.push_back(springForceGenerator->getStartPoint());
+		ParticleSystem::aplyForceGenerators(fg);
+		particles.pop_back();
+	}
+	
+	else
+	{
+		ParticleSystem::aplyForceGenerators(fg);
+	}
+	
 }
 
 void Spring::changeK(float k)

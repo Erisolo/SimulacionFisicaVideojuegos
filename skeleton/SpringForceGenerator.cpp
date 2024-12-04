@@ -1,5 +1,27 @@
 #include "SpringForceGenerator.h"
 
+void SpringForceGenerator::Update(std::vector<Particle*>& ps, double dt)
+{
+	if (!staticSP)
+	{
+		//todas las particulas van a tener la misma pos
+		Vector3 RelativePos = ps[0]->getPos() - startPoint->getPos();
+
+		float len = RelativePos.normalize();
+		float delta = len - rest_len;
+
+		if (negativeLenghtForce || delta >= 0)
+		{
+			startPoint->applyForce(RelativePos * delta * K);
+		}
+
+		
+		//esto es como el aply force pero al reves
+	}
+
+	ForceGenerator::Update(ps, dt);
+}
+
 void SpringForceGenerator::aplyForce(Particle* p, double dt)
 {
 	Vector3 RelativePos = startPoint->getPos() - p->getPos();
@@ -7,5 +29,8 @@ void SpringForceGenerator::aplyForce(Particle* p, double dt)
 	float len = RelativePos.normalize();
 	float delta = len - rest_len;
 
-	p->applyForce(RelativePos * delta * K);
+	if (negativeLenghtForce || delta >= 0)
+	{
+		p->applyForce(RelativePos * delta * K);
+	}
 }

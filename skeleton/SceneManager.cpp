@@ -28,7 +28,7 @@ void SceneManager::init()
 {
 	//sistemaParticulas.push_back(new ParticleSystem(Vector3(0, 90, 0), RAIN));
 	forceGenerators.push_back(new GravityGenerator(9.8));
-	spring = new Spring(Vector3(0.0), Vector3(0, 50, 0));
+	spring = new Spring(Vector3(0.0), Vector3(0, 50, 0), 70);
 	sistemaParticulas.push_back(spring);
 	//forceGenerators.push_back(new TorbellinoGenerator(0.7, Vector3(0), 500, 12));
 	//forceGenerators.push_back(new ExplosionGenerator(Vector3(0, 0, 0), 700, 500));
@@ -107,9 +107,10 @@ void SceneManager::Shoot(char c, Vector3 pos)
 		forceGenerators.push_back(new ExplosionGenerator(Vector3(0, 0, 0), 1600000, 50, 1));
 		break;
 	}
-	case 'm':
+	case 'M':
 	{
 		spring->changeK(400);
+		break;
 	}
 
 
