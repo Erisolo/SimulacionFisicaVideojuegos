@@ -1,4 +1,5 @@
 #include "SolidsSystem.h"
+#include "ParticleSystem.h"
 
 void SolidsSystem::addSolid()
 {
@@ -31,7 +32,7 @@ RigidSolid* SolidsSystem::generateSolid()
 	pos.z += normal_dist(seed) * posFac.z;
 
 
-	return new RigidSolid("cube", scene, gP, pos, vel, Vector4(0,1,0,1), Vector3(4), 5, 4);
+	return new RigidSolid("cube", scene, gP, pos, vel, Vector4(0,1,0,1), Vector3(1), 5, 4);
 }
 
 void SolidsSystem::deleteDeadSolids()
@@ -60,8 +61,55 @@ void SolidsSystem::deleteSolids()
 	actNumOfSolids = 0;
 }
 
+void SolidsSystem::asignateSystem(GenerationSystems g)
+{
+	switch (g)
+	{
+	case RAIN:
+		meanVel = { 0, -50, 0 };
+		velFac = { 0, 5, 0 };
+		posFac = { 15, 0, 15 };
+		lifeTime = 10;
+		maxNumofSolids = 500;
+		framerate = 0.01;
+		constantGen = true;
+		break;
+	case EXPLOSION:
+		meanVel = { 0, 0, 0 };
+		velFac = { 60, 60, 60 };
+		posFac = { 0, 0, 0 };
+		lifeTime = 400;
+		maxNumofSolids = 100;
+		framerate = 0.1;
+		constantGen = false;
+		break;
+	case MANGUERA:
+		meanVel = { -30, 60, -100 };
+		velFac = { 5, 5, 5 };
+		posFac = { 2, 0, 2 };
+		lifeTime = 4;
+		maxNumofSolids = 1000;
+		framerate = 0.001;
+		constantGen = true;
+		break;
+	default:
+		break;
+	}
+}
 
-SolidsSystem::SolidsSystem(Vector3 initPos, PxScene* s, PxPhysics* g): scene(s), gP(g)
+void SolidsSystem::initSystem()
+{
+	if (!constantGen)
+	{
+		for (int i = 0; i < maxNumofSolids; i++)
+			addSolid();
+
+		actNumOfSolids = maxNumofSolids;
+	}
+}
+
+
+SolidsSystem::SolidsSystem(Vector3 initPos, PxScene* s, PxPhysics* g, GenerationSystems gs): scene(s), gP(g)
 {
 	fuente = initPos;
 	seed = std::mt19937();
@@ -69,16 +117,11 @@ SolidsSystem::SolidsSystem(Vector3 initPos, PxScene* s, PxPhysics* g): scene(s),
 
 
 	//asignamos constantes
-	meanVel = { 0, -50, 0 };
-	velFac = { 0, 5, 0 };
-	posFac = { 15, 0, 15 };
-	maxNumofSolids = 200;
-	framerate = 0.1;
-
-
+	asignateSystem(gs);
 
 
 	solids = std::vector<RigidSolid*>(maxNumofSolids);
+	initSystem();
 }
 
 SolidsSystem::~SolidsSystem()

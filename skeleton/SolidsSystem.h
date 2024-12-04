@@ -3,6 +3,9 @@
 #include <random>
 #include "RigidSolid.h"
 #include "ForceGenerator.h"
+
+
+enum GenerationSystems;
 class SolidsSystem
 {
 protected:
@@ -12,6 +15,7 @@ protected:
 	int maxNumofSolids;
 	PxScene* scene;
 	PxPhysics* gP;
+	bool constantGen = true;
 	
 
 private:
@@ -19,6 +23,7 @@ private:
 	double framerate, actTime = 0;
 	std::mt19937 seed;
 	std::normal_distribution<> normal_dist;
+	float lifeTime;
 
 	Vector3 meanVel, velFac, posFac;
 
@@ -26,10 +31,13 @@ private:
 	RigidSolid* generateSolid();
 	void deleteDeadSolids();
 	void deleteSolids();
+	void asignateSystem(GenerationSystems g);
+
+	void initSystem();
 
 
 public:
-	SolidsSystem(Vector3 initPos, PxScene* s, PxPhysics* g);
+	SolidsSystem(Vector3 initPos, PxScene* s, PxPhysics* g, GenerationSystems gs);
 	virtual ~SolidsSystem();
 
 	virtual void Update(double t);

@@ -61,7 +61,7 @@ void SceneManager::init()
 	solids.push_back(new RigidSolid("badCube", scene, gPhysics, Vector3(20, 50, 0), Vector3(0), Vector4(8.9, 0, 3.2, 1), Vector3(5, 5, 5), 7));
 
 	//solid sytems
-	solidSystems.push_back(new SolidsSystem(Vector3(0, 50, 0), scene, gPhysics));
+	solidSystems.push_back(new SolidsSystem(Vector3(0, 90, 0), scene, gPhysics,	RAIN));
 }
 
 void SceneManager::Uptade(double t)
