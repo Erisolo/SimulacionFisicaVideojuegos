@@ -4,6 +4,8 @@
 #include "TorbellinoGenerator.h"
 #include "ExplosionGenerator.h"
 #include "Spring.h"
+#include "FloatingParticlesSystem.h"
+#include "SquareParticle.h"
 SceneManager::SceneManager()
 {
 	
@@ -28,7 +30,7 @@ void SceneManager::init()
 {
 	//sistemaParticulas.push_back(new ParticleSystem(Vector3(0, 90, 0), RAIN));
 	forceGenerators.push_back(new GravityGenerator(9.8));
-	spring = new Spring(Vector3(0, 40, 0), Vector3(0, 30, 0), 20); 
+	/*spring = new Spring(Vector3(0, 40, 0), Vector3(0, 30, 0), 20); 
 	Spring* s2 = new Spring(spring->getAtatchedParticle(), new Particle(Vector3(0,20,0), Vector3(0.0), 5), 20);
 	Spring* s3 = new Spring(s2->getAtatchedParticle(), new Particle(Vector3(0, 10, 0), Vector3(0.0), 5), 20);
 	Spring* s4 = new Spring(s3->getAtatchedParticle(), new Particle(Vector3(0, 0, 0), Vector3(0.0), 5), 20);
@@ -36,7 +38,12 @@ void SceneManager::init()
 	sistemaParticulas.push_back(spring);
 	sistemaParticulas.push_back(s2);
 	sistemaParticulas.push_back(s3);
-	sistemaParticulas.push_back(s4);
+	sistemaParticulas.push_back(s4);*/
+
+	FloatingParticlesSystem* f = new FloatingParticlesSystem(Vector3(0, 40, 0), 1000, 50);
+	sistemaParticulas.push_back(f);
+	Particle* floaty = new SquareParticle(Vector3(0, 60, 0), Vector3(0.0), 5, 2, 2, 2);
+	f->attatchParticle(floaty);
 
 	//forceGenerators.push_back(new TorbellinoGenerator(0.7, Vector3(0), 500, 12));
 	//forceGenerators.push_back(new ExplosionGenerator(Vector3(0, 0, 0), 700, 500));

@@ -10,8 +10,7 @@ private:
 	float density;
 
 public:
-	BuoyancyForceGenerator(Particle* sp, double k, double rl, bool ssp = true, bool nlf = true);
-	void Update(std::vector<Particle*>& ps, double dt = 0) override;
-	void aplyForce(Particle* p, double dt) override;
+	BuoyancyForceGenerator(Particle* wt, float h, float d, float v): waterline(wt), height(h), density(d), volume(v){}
+	void aplyForce(Particle* p, double dt = 0) override;
 };
 

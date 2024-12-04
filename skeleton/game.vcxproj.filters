@@ -23,6 +23,7 @@
     <ClCompile Include="Spring.cpp" />
     <ClCompile Include="SquareParticle.cpp" />
     <ClCompile Include="BuoyancyForceGenerator.cpp" />
+    <ClCompile Include="FloatingParticlesSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core.hpp" />
@@ -47,6 +48,7 @@
     <ClInclude Include="Spring.h" />
     <ClInclude Include="SquareParticle.h" />
     <ClInclude Include="BuoyancyForceGenerator.h" />
+    <ClInclude Include="FloatingParticlesSystem.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Render">
