@@ -3,6 +3,7 @@
 #include <ctype.h>
 #include "core.hpp"
 #include "RenderUtils.hpp"
+#include <string>
 using namespace physx;
 
 class Particle
@@ -11,6 +12,8 @@ class Particle
 public:
 	Particle(Vector3 pos, Vector3 vel, float m);
 	Particle(Vector3 pos, Vector3 vel, double lf, Vector4 col, float m);
+
+	virtual void init();
 	~Particle();
 
 	virtual void Integrate(double t);

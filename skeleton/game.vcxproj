@@ -253,6 +253,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BuoyancyForceGenerator.cpp" />
     <ClCompile Include="callbacks.cpp" />
     <ClCompile Include="ExplosionGenerator.cpp" />
     <ClCompile Include="ForceGenerator.cpp" />
@@ -267,10 +268,12 @@
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="Spring.cpp" />
     <ClCompile Include="SpringForceGenerator.cpp" />
+    <ClCompile Include="SquareParticle.cpp" />
     <ClCompile Include="TorbellinoGenerator.cpp" />
     <ClCompile Include="WindGenerator.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BuoyancyForceGenerator.h" />
     <ClInclude Include="callbacks.hpp" />
     <ClInclude Include="core.hpp" />
     <ClInclude Include="ExplosionGenerator.h" />
@@ -285,6 +288,7 @@
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="Spring.h" />
     <ClInclude Include="SpringForceGenerator.h" />
+    <ClInclude Include="SquareParticle.h" />
     <ClInclude Include="TorbellinoGenerator.h" />
     <ClInclude Include="WindGenerator.h" />
   </ItemGroup>

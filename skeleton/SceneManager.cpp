@@ -37,6 +37,7 @@ void SceneManager::init()
 	sistemaParticulas.push_back(s2);
 	sistemaParticulas.push_back(s3);
 	sistemaParticulas.push_back(s4);
+
 	//forceGenerators.push_back(new TorbellinoGenerator(0.7, Vector3(0), 500, 12));
 	//forceGenerators.push_back(new ExplosionGenerator(Vector3(0, 0, 0), 700, 500));
 	//particles.push_back(new Particle(Vector3(0, 20, 0), Vector3(0), 1)); //particula de prueba

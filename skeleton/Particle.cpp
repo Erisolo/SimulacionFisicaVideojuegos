@@ -6,7 +6,7 @@ Particle::Particle(Vector3 pos, Vector3 Vel, float m): vel(Vel), myMass(m)
 	forces = Vector3(0);
 	Pose = PxTransform(pos);
 
-	renderItem = new RenderItem(CreateShape(PxSphereGeometry(2)), &Pose, { 1, 1, 1, 1 });
+	this->init();
 	
 }
 
@@ -16,9 +16,15 @@ Particle::Particle(Vector3 pos, Vector3 vel, double lf, Vector4 col, float m): v
 	forces = Vector3(0);
 	Pose = PxTransform(pos);
 
-	renderItem = new RenderItem(CreateShape(PxSphereGeometry(2)), &Pose, { 1, 1, 1, 1 });
+	
 	isAlive = true;
+	this->init();
 
+}
+
+void Particle::init()
+{
+	renderItem = new RenderItem( (PxSphereGeometry(2)), &Pose, { 1, 1, 1, 1 });
 }
 
 Particle::~Particle()
