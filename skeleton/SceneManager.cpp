@@ -28,17 +28,19 @@ SceneManager::~SceneManager()
 
 void SceneManager::init()
 {
+	
+	//setting up the floor
+	PxRigidStatic* suelo = gPhysics->createRigidStatic(PxTransform(Vector3(0.0)));
+	PxShape* shape = CreateShape(PxBoxGeometry(100, 0.1, 100));
+	suelo->attachShape(*shape);
+	scene->addActor(*suelo);
+	RenderItem* renderitem = new RenderItem(shape, suelo, { 0.8, 0.8, 0.8, 1 });
+
+
+	//now setting the particles and stuff
+
 	//sistemaParticulas.push_back(new ParticleSystem(Vector3(0, 90, 0), RAIN));
 	forceGenerators.push_back(new GravityGenerator(9.8));
-	/*spring = new Spring(Vector3(0, 40, 0), Vector3(0, 30, 0), 20); 
-	Spring* s2 = new Spring(spring->getAtatchedParticle(), new Particle(Vector3(0,20,0), Vector3(0.0), 5), 20);
-	Spring* s3 = new Spring(s2->getAtatchedParticle(), new Particle(Vector3(0, 10, 0), Vector3(0.0), 5), 20);
-	Spring* s4 = new Spring(s3->getAtatchedParticle(), new Particle(Vector3(0, 0, 0), Vector3(0.0), 5), 20);
-
-	sistemaParticulas.push_back(spring);
-	sistemaParticulas.push_back(s2);
-	sistemaParticulas.push_back(s3);
-	sistemaParticulas.push_back(s4);*/
 
 	FloatingParticlesSystem* f = new FloatingParticlesSystem(Vector3(0, 40, 0), 1000);
 	sistemaParticulas.push_back(f);
@@ -120,11 +122,6 @@ void SceneManager::Shoot(char c, Vector3 pos)
 	case 'P':	//plosion
 	{
 		forceGenerators.push_back(new ExplosionGenerator(Vector3(0, 0, 0), 1600000, 50, 1));
-		break;
-	}
-	case 'M':
-	{
-		spring->changeK(400);
 		break;
 	}
 

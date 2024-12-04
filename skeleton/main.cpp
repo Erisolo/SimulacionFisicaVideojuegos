@@ -12,9 +12,8 @@
 
 
 #include "SceneManager.h"
+
 std::string display_text = "This is a test";
-
-
 using namespace physx;
 
 PxDefaultAllocator		gAllocator;
@@ -60,8 +59,11 @@ void initPhysics(bool interactive)
 	sceneDesc.simulationEventCallback = &gContactReportCallback;
 	gScene = gPhysics->createScene(sceneDesc);
 
+	
+
 
 	sceneManager = new SceneManager();
+	sceneManager->addNecesitiesForRigids(gScene, gPhysics);
 	sceneManager->init();
 
 	}
