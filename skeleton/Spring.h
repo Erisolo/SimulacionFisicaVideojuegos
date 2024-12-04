@@ -16,6 +16,7 @@ public:
 
 	void attatchParticle(Particle* p);
 	void deatatchParticle();
+	Particle* getAtatchedParticle() { return particles[0]; }
 	void changeStartingPoint(Particle* p);
 
 	void Update(double t) override;

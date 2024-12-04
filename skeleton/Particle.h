@@ -29,7 +29,7 @@ protected:
 	Vector3 acc;
 	Vector3 forces;
 	float myMass;
-	//double damping;
+	//double damping = 40;
 	PxTransform Pose;
 	RenderItem* renderItem;
 	bool isAlive = true;

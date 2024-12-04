@@ -28,8 +28,15 @@ void SceneManager::init()
 {
 	//sistemaParticulas.push_back(new ParticleSystem(Vector3(0, 90, 0), RAIN));
 	forceGenerators.push_back(new GravityGenerator(9.8));
-	spring = new Spring(Vector3(0.0), Vector3(0, 50, 0), 70);
+	spring = new Spring(Vector3(0, 40, 0), Vector3(0, 30, 0), 20); 
+	Spring* s2 = new Spring(spring->getAtatchedParticle(), new Particle(Vector3(0,20,0), Vector3(0.0), 5), 20);
+	Spring* s3 = new Spring(s2->getAtatchedParticle(), new Particle(Vector3(0, 10, 0), Vector3(0.0), 5), 20);
+	Spring* s4 = new Spring(s3->getAtatchedParticle(), new Particle(Vector3(0, 0, 0), Vector3(0.0), 5), 20);
+
 	sistemaParticulas.push_back(spring);
+	sistemaParticulas.push_back(s2);
+	sistemaParticulas.push_back(s3);
+	sistemaParticulas.push_back(s4);
 	//forceGenerators.push_back(new TorbellinoGenerator(0.7, Vector3(0), 500, 12));
 	//forceGenerators.push_back(new ExplosionGenerator(Vector3(0, 0, 0), 700, 500));
 	//particles.push_back(new Particle(Vector3(0, 20, 0), Vector3(0), 1)); //particula de prueba

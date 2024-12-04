@@ -37,8 +37,6 @@ void Particle::Integrate(double dt)
 	}
 		
 	Pose.p = Pose.p + vel * dt;
-	
-	/*vel = vel * pow(damping, dt);*/
 
 	if (lifeTime > 0)	//se comprueba solo si tiene lifetime
 	{
