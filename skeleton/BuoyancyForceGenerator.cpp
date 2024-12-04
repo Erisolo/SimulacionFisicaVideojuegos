@@ -9,11 +9,11 @@ void BuoyancyForceGenerator::aplyForce(Particle* p, double dt)
 
 	float immersed = 0.0;
 
-	if (h - h0 > height * 0.5) {
+	if ((h - h0) > height * 0.5) {
 		immersed = 0.0;
 	}
 
-	else if (h0 - h > height * 0.5) {
+	else if ((h0 - h) > height * 0.5) {
 		immersed = 1.0;
 	}
 
@@ -21,7 +21,7 @@ void BuoyancyForceGenerator::aplyForce(Particle* p, double dt)
 		immersed = (h0 - h) / height + 0.5;
 	}
 
-	force.y = density * volume * immersed * 9.8;
+	force.y = density * volume * immersed; // *9.8;
 	p->applyForce(force);
 
 }
