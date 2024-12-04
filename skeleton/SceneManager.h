@@ -2,7 +2,7 @@
 //#include "Particle.h"
 #include "ParticleSystem.h"
 #include "ForceGenerator.h"
-#include "RigidSolid.h"
+#include "SolidsSystem.h"
 #include <PxPhysicsAPI.h>
 
 using namespace physx;
@@ -25,6 +25,7 @@ private:
 	std::vector<ParticleSystem*> sistemaParticulas;
 	std::vector<ForceGenerator*> forceGenerators;
 	std::vector<RigidSolid*> solids;
+	std::vector<SolidsSystem*> solidSystems;
 
 	PxScene* scene;
 	PxPhysics* gPhysics;

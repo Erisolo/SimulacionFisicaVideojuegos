@@ -59,6 +59,9 @@ void SceneManager::init()
 	//rigids
 	solids.push_back(new RigidSolid("cube", scene, gPhysics, Vector3(0, 50, 0), Vector3(0), Vector4(8.9, 0, 3.2, 1), Vector3(5, 5, 5), 7));
 	solids.push_back(new RigidSolid("badCube", scene, gPhysics, Vector3(20, 50, 0), Vector3(0), Vector4(8.9, 0, 3.2, 1), Vector3(5, 5, 5), 7));
+
+	//solid sytems
+	solidSystems.push_back(new SolidsSystem(Vector3(0, 50, 0), scene, gPhysics));
 }
 
 void SceneManager::Uptade(double t)
@@ -100,6 +103,16 @@ void SceneManager::Uptade(double t)
 
 		}
 		
+	}
+	for (int i = 0; i < solidSystems.size(); i++)
+	{
+		if (solidSystems[i] != nullptr)
+		{
+			solidSystems[i]->Update(t);
+			//solidSystems[i]->aplyForceGenerators(forceGenerators);
+
+		}
+
 	}
 }
 

@@ -53,6 +53,7 @@
     <ClCompile Include="Spring.cpp">
       <Filter>ParticleSystems</Filter>
     </ClCompile>
+    <ClCompile Include="SolidsSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core.hpp" />
@@ -107,6 +108,7 @@
     <ClInclude Include="Spring.h">
       <Filter>ParticleSystems</Filter>
     </ClInclude>
+    <ClInclude Include="SolidsSystem.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Render">

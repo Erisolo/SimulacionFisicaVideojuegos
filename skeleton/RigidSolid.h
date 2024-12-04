@@ -13,13 +13,16 @@ private:
 	PxRigidDynamic* body;
 	PxTransform* trans;
 	RenderItem* renderItem;
+	float lifeTime;
 
 
 public:
-	RigidSolid(std::string shape, PxScene* s, PxPhysics* gP, Vector3 pos, Vector3 vel, Vector4 col, Vector3 size, float mass);
+	RigidSolid(std::string shape, PxScene* s, PxPhysics* gP, Vector3 pos, Vector3 vel, Vector4 col, Vector3 size, float mass, float lf = 0);
+	~RigidSolid();
 
 	//void Integrate(double t);
 	inline bool alive() noexcept { return isAlive; }
+	void update(double dt);
 	void applyForce(Vector3 fc);
 
 

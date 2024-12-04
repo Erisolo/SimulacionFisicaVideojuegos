@@ -1,6 +1,6 @@
 #include "RigidSolid.h"
 
-RigidSolid::RigidSolid(std::string sh, PxScene* s, PxPhysics* gP, Vector3 pos, Vector3 vel, Vector4 col, Vector3 size, float mass)
+RigidSolid::RigidSolid(std::string sh, PxScene* s, PxPhysics* gP, Vector3 pos, Vector3 vel, Vector4 col, Vector3 size, float mass, float t)
 {
 	//we create the rigid
 	body = gP->createRigidDynamic(PxTransform(pos));
@@ -19,23 +19,49 @@ RigidSolid::RigidSolid(std::string sh, PxScene* s, PxPhysics* gP, Vector3 pos, V
 	else if (sh == "badCube")
 	{
 		shape = CreateShape(PxBoxGeometry(size)); 
-
-		ix = (1.0f / 12.0f) * mass * (size.y * size.y + size.z * size.z);
-		iy = (1.0f / 12.0f) * mass * (size.x * size.x + size.z * size.z);
-		iz = (1.0f / 12.0f) * mass * (size.x * size.x + size.y * size.y);
-		body->setMassSpaceInertiaTensor({ ix, iy, iz });
 	}
 	//else if ...
 
 	//adding everything together
 	body->attachShape(*shape);
-	if (sh == "cube")
-	{
-		PxRigidBodyExt::updateMassAndInertia(*body, mass);
-	}
+	PxRigidBodyExt::updateMassAndInertia(*body, mass);
+	
 	s->addActor(*body);
 
 	//and now so we can see it
 	renderItem = new RenderItem(shape, body, col);
 
+	//finally, so it can be alive:
+	lifeTime = t;
+	isAlive = true;
+
+}
+
+RigidSolid::~RigidSolid()
+{
+	PxScene* scene = body->getScene();
+	if (scene) {
+		scene->removeActor(*body);
+	}
+
+	// Libera el objeto
+	body->release();
+	body = nullptr;
+
+	DeregisterRenderItem(renderItem);
+	delete renderItem;
+}
+
+void RigidSolid::update(double dt)
+{
+	if (lifeTime > 0)	//se comprueba solo si tiene lifetime
+	{
+		lifeTime -= dt;
+		isAlive = lifeTime > 0;
+
+	}
+}
+
+void RigidSolid::applyForce(Vector3 fc)
+{
 }
