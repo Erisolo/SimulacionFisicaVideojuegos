@@ -36,11 +36,24 @@ void SceneManager::init()
 {
 	
 	//setting up the floor
-	PxRigidStatic* suelo = gPhysics->createRigidStatic(PxTransform(Vector3(0.0)));
-	PxShape* shape = CreateShape(PxBoxGeometry(100, 0.1, 100));
+	PxRigidStatic* suelo = gPhysics->createRigidStatic(PxTransform(Vector3(0, 0, -200)));
+	PxShape* shape = CreateShape(PxBoxGeometry(100, 0.1, 250));
 	suelo->attachShape(*shape);
 	scene->addActor(*suelo);
 	RenderItem* renderitem = new RenderItem(shape, suelo, { 0.8, 0.8, 0.8, 1 });
+
+	//now the side pannels of the floor
+	PxRigidStatic* side1 = gPhysics->createRigidStatic(PxTransform(Vector3(60, 5, -200)));
+	shape = CreateShape(PxBoxGeometry(40, 5, 250));
+	side1->attachShape(*shape);
+	scene->addActor(*side1);
+	renderitem = new RenderItem(shape, side1, { 0.38, 0.96, 0.46, 1 });
+
+	side1 = gPhysics->createRigidStatic(PxTransform(Vector3(-60, 5, -200)));
+	shape = CreateShape(PxBoxGeometry(40, 5, 250));
+	side1->attachShape(*shape);
+	scene->addActor(*side1);
+	renderitem = new RenderItem(shape, side1, { 0.38, 0.96, 0.46, 1 });
 
 
 	//now setting the particles and stuff
@@ -59,10 +72,9 @@ void SceneManager::init()
 	
 	//rigids
 	solids.push_back(new RigidSolid("cube", scene, gPhysics, Vector3(0, 50, 0), Vector3(0), Vector4(8.9, 0, 3.2, 1), Vector3(5, 5, 5), 7));
-	solids.push_back(new RigidSolid("badCube", scene, gPhysics, Vector3(20, 50, 0), Vector3(0), Vector4(8.9, 0, 3.2, 1), Vector3(5, 5, 5), 7));
 
 	//solid sytems
-	solidSystems.push_back(new SolidsSystem(Vector3(0, 0, 0), scene, gPhysics,	MANGUERA));
+	//solidSystems.push_back(new SolidsSystem(Vector3(0, 90, 0), scene, gPhysics,	RAIN));
 }
 
 void SceneManager::Uptade(double t)

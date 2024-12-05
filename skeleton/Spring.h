@@ -1,6 +1,7 @@
 #pragma once
 class SpringForceGenerator;
 #include "ParticleSystem.h"
+#include "RigidSolid.h"
 
 //SOLO PUEDE TENER UNA PARTICULAS ATATCHADA AL MISMO TIEMPO
 class Spring: public ParticleSystem //no tiene nada q ver pero bueno aqui está
@@ -17,8 +18,16 @@ public:
 
 	void attatchParticle(Particle* p);
 	void deatatchParticle();
-	Particle* getAtatchedParticle() { if(particles.size() > 0) return particles[0]; }
-	RigidSolid* getAtatchedSolid() { if (solids.size() > 0) return solids[0]; }
+	Particle* getAtatchedParticle() 
+	{
+		if (particles.size() > 0) 
+			return particles[0]; 
+		return nullptr;
+	}
+	RigidSolid* getAtatchedSolid() { 
+		if (solids.size() > 0) 
+			return solids[0]; 
+		return nullptr; }
 	void changeStartingPoint(Particle* p);
 
 	void Update(double t) override;
