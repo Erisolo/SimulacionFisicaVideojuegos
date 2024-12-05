@@ -7,6 +7,7 @@ private:
 public:
 	TorbellinoGenerator(float Wi, Vector3 cntr, float roi, float hi);
 	void aplyForce(Particle* p, double dt) override;
+	void aplyForce(RigidSolid* p, double dt) override;
 
 };
 

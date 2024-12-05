@@ -34,3 +34,15 @@ void SpringForceGenerator::aplyForce(Particle* p, double dt)
 		p->applyForce(RelativePos * delta * K);
 	}
 }
+void SpringForceGenerator::aplyForce(RigidSolid* p, double dt)
+{
+	Vector3 RelativePos = startPoint->getPos() - p->getPos();
+
+	float len = RelativePos.normalize();
+	float delta = len - rest_len;
+
+	if (negativeLenghtForce || delta >= 0)
+	{
+		p->applyForce(RelativePos * delta * K);
+	}
+}

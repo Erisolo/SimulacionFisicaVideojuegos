@@ -52,7 +52,7 @@ void SceneManager::init()
 
 	//the force generators
 	// forceGenerators.push_back(new GravityGenerator(9.8));
-	forceGenerators.push_back(new WindGenerator(Vector3(-100, 0, 100), 0.7, Vector3(0.0), 500));
+	//forceGenerators.push_back(new WindGenerator(Vector3(-100, 0, 100), 0.7, Vector3(0.0), 500));
 	//forceGenerators.push_back(new TorbellinoGenerator(0.7, Vector3(0), 500, 12));
 	//forceGenerators.push_back(new ExplosionGenerator(Vector3(0, 0, 0), 700, 500));
 	//particles.push_back(new Particle(Vector3(0, 20, 0), Vector3(0), 1)); //particula de prueba
@@ -62,7 +62,7 @@ void SceneManager::init()
 	solids.push_back(new RigidSolid("badCube", scene, gPhysics, Vector3(20, 50, 0), Vector3(0), Vector4(8.9, 0, 3.2, 1), Vector3(5, 5, 5), 7));
 
 	//solid sytems
-	solidSystems.push_back(new SolidsSystem(Vector3(0, 90, 0), scene, gPhysics,	RAIN));
+	solidSystems.push_back(new SolidsSystem(Vector3(0, 0, 0), scene, gPhysics,	MANGUERA));
 }
 
 void SceneManager::Uptade(double t)

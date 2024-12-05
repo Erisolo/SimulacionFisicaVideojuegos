@@ -8,6 +8,7 @@ class Spring: public ParticleSystem //no tiene nada q ver pero bueno aqui está
 private:
 	SpringForceGenerator* springForceGenerator;
 	bool staticSP;
+	std::vector<RigidSolid*> solids;
 	//cosas de particle system
 
 public:
@@ -16,7 +17,8 @@ public:
 
 	void attatchParticle(Particle* p);
 	void deatatchParticle();
-	Particle* getAtatchedParticle() { return particles[0]; }
+	Particle* getAtatchedParticle() { if(particles.size() > 0) return particles[0]; }
+	RigidSolid* getAtatchedSolid() { if (solids.size() > 0) return solids[0]; }
 	void changeStartingPoint(Particle* p);
 
 	void Update(double t) override;

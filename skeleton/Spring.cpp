@@ -54,18 +54,28 @@ void Spring::Update(double t)
 
 void Spring::aplyForceGenerators(std::vector<ForceGenerator*>& fg)
 {
-	springForceGenerator->Update(particles);
-	
-	if (!staticSP)
+	if (particles.size() > 0)
 	{
-		particles.push_back(springForceGenerator->getStartPoint());
-		ParticleSystem::aplyForceGenerators(fg);
-		particles.pop_back();
+		springForceGenerator->Update(particles);
+
+		if (!staticSP)
+		{
+			particles.push_back(springForceGenerator->getStartPoint());
+			ParticleSystem::aplyForceGenerators(fg);
+			particles.pop_back();
+		}
+
+		else
+		{
+			ParticleSystem::aplyForceGenerators(fg);
+		}
+
 	}
-	
-	else
+	else if (solids.size() > 0)
 	{
+		springForceGenerator->Update(particles);
 		ParticleSystem::aplyForceGenerators(fg);
+
 	}
 	
 }
