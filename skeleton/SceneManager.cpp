@@ -6,6 +6,8 @@
 #include "Spring.h"
 #include "FloatingParticlesSystem.h"
 #include "SquareParticle.h"
+#include "ObstaclesGenerator.h"
+
 SceneManager::SceneManager()
 {
 	
@@ -37,7 +39,7 @@ void SceneManager::init()
 	
 	//setting up the floor
 	PxRigidStatic* suelo = gPhysics->createRigidStatic(PxTransform(Vector3(0, 0, -200)));
-	PxShape* shape = CreateShape(PxBoxGeometry(100, 0.1, 250));
+	PxShape* shape = CreateShape(PxBoxGeometry(100, 0.1, 350));
 	suelo->attachShape(*shape);
 	scene->addActor(*suelo);
 	RenderItem* renderitem = new RenderItem(shape, suelo, { 0.8, 0.8, 0.8, 1 });
@@ -57,21 +59,17 @@ void SceneManager::init()
 
 
 	//now setting the particles and stuff
-	//sistemaParticulas.push_back(new ParticleSystem(Vector3(0, 90, 0), RAIN));
-	/*FloatingParticlesSystem* f = new FloatingParticlesSystem(Vector3(0, 40, 0), 1000);
-	sistemaParticulas.push_back(f);
-	Particle* floaty = new SquareParticle(Vector3(0, 41, 0), Vector3(0.0), 15, 1, 1, 1);
-	f->attatchParticle(floaty, 2, 8);*/
+
 
 	//the force generators
-	// forceGenerators.push_back(new GravityGenerator(9.8));
-	//forceGenerators.push_back(new WindGenerator(Vector3(-100, 0, 100), 0.7, Vector3(0.0), 500));
-	//forceGenerators.push_back(new TorbellinoGenerator(0.7, Vector3(0), 500, 12));
-	//forceGenerators.push_back(new ExplosionGenerator(Vector3(0, 0, 0), 700, 500));
-	//particles.push_back(new Particle(Vector3(0, 20, 0), Vector3(0), 1)); //particula de prueba
 	
 	//rigids
-	solids.push_back(new RigidSolid("cube", scene, gPhysics, Vector3(0, 50, 0), Vector3(0), Vector4(8.9, 0, 3.2, 1), Vector3(5, 5, 5), 7));
+	player = new RigidSolid("cube", scene, gPhysics, Vector3(0, 20, 0), Vector3(0), Vector4(8.9, 0, 3.2, 1), Vector3(2, 2, 2), 0.2, 0, true);
+	solids.push_back(player);
+
+	//making the obstacles
+	solidSystems.push_back(new ObstaclesGenerator(scene, gPhysics, Vector3(0, 3, -100), Vector3(0, 0, 50), Vector3(0.0), Vector3(20, 4, 30), 20));
+
 
 	//solid sytems
 	//solidSystems.push_back(new SolidsSystem(Vector3(0, 90, 0), scene, gPhysics,	RAIN));
@@ -79,6 +77,8 @@ void SceneManager::init()
 
 void SceneManager::Uptade(double t)
 {
+
+	//en todos los updates fijamos al player en la posición
 	for (int i = 0; i < sistemaParticulas.size(); i++)
 	{
 		if (sistemaParticulas[i] != nullptr)
@@ -134,29 +134,17 @@ void SceneManager::Shoot(char c, Vector3 pos)
 {
 	switch (c)
 	{
-	//case 'P': //proyectil normla
-	//{
-	//	particles.push_back(new Proyectil(pos, Vector3(-50, 10, -50), 0.98, 20000));
-	//	break;
-	//}
-	//case 'G': //globo
-	//{
-	//	particles.push_back(new Proyectil(pos, Vector3(-20, 0, -20), 0.98, 2, Vector3(0, -2, 0)));
-	//	break;
-	//}
-	//case 'B': //bala
-	//{
-	//	particles.push_back(new Proyectil(pos, Vector3(-120, 0, -120), 0.98, 2000));
-	//	break;
-	//}
-	//case 'V': //vertical
-	//{
-	//	particles.push_back(new Proyectil(pos - Vector3(10), Vector3(-5, 20, -5), 0.98, 2000));
-	//	break;
-	//}
 	case 'P':	//plosion
 	{
-		forceGenerators.push_back(new ExplosionGenerator(Vector3(0, 0, 0), 1600000, 50, 1));
+		//forceGenerators.push_back(new ExplosionGenerator(Vector3(0, 0, 0), 1600000, 50, 1));
+		break;
+	}
+	case ' ':	//plosion
+	{
+		//if (player->getVel().magnitudeSquared() < 1) //solo si está quieto 
+		{
+			player->applyForce(Vector3(0, 30000, 0));
+		}
 		break;
 	}
 
@@ -166,3 +154,6 @@ void SceneManager::Shoot(char c, Vector3 pos)
 	}
 	
 }
+
+///se puede bloquear una dimensión o incluso dos) //jiji
+//

@@ -96,7 +96,7 @@ void renderCallback()
 #endif
 
 	startRender(sCamera->getEye(), sCamera->getDir());
-
+	
 	//fprintf(stderr, "Num Render Items: %d\n", static_cast<int>(gRenderItems.size()));
 	for (auto it = gRenderItems.begin(); it != gRenderItems.end(); ++it)
 	{
@@ -139,7 +139,7 @@ void renderLoop()
 	StartCounter();
 	sCamera = new Camera(PxVec3(50.0f, 50.0f, 50.0f), PxVec3(-0.6f,-0.2f,-0.7f));
 
-	setupDefaultWindow("Simulacion Fisica Videojuegos");
+	setupDefaultWindow("TRAM BODYBOARDERS");
 	setupDefaultRenderState();
 
 	glutIdleFunc(idleCallback);

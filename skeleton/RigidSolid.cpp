@@ -1,6 +1,6 @@
 #include "RigidSolid.h"
 
-RigidSolid::RigidSolid(std::string sh, PxScene* s, PxPhysics* gP, Vector3 pos, Vector3 vel, Vector4 col, Vector3 size, float mass, float t)
+RigidSolid::RigidSolid(std::string sh, PxScene* s, PxPhysics* gP, Vector3 pos, Vector3 vel, Vector4 col, Vector3 size, float mass, float t, bool lockin, bool lockedOtherWay)
 {
 	//we create the rigid
 	trans = PxTransform(pos);
@@ -9,22 +9,37 @@ RigidSolid::RigidSolid(std::string sh, PxScene* s, PxPhysics* gP, Vector3 pos, V
 
 	//we create the shape
 	PxShape* shape;
-	float ix, iy, iz; //for inercia
+	
+	PxMaterial* material = gP->createMaterial(0.0f, 1.0f, 1.0f); //para q no bote nadie
 	if (sh == "cube")
 	{
-		shape = CreateShape(PxBoxGeometry(size));
-
-		
-
-	}
-	else if (sh == "badCube")
-	{
-		shape = CreateShape(PxBoxGeometry(size)); 
+		shape = CreateShape(PxBoxGeometry(size), gP->createMaterial(0.0f, 1.0f, 0.0f));
 	}
 	//else if ...
 
 	//adding everything together
+	
 	body->attachShape(*shape);
+
+	if (lockin)
+	{
+		//body->setRigidDynamicLockFlag(PxRigidDynamicLockFlag::eLOCK_LINEAR_Y, true);
+
+		body->setRigidDynamicLockFlag(PxRigidDynamicLockFlag::eLOCK_LINEAR_X, true);
+		body->setRigidDynamicLockFlag(PxRigidDynamicLockFlag::eLOCK_ANGULAR_X, true);
+		body->setRigidDynamicLockFlag(PxRigidDynamicLockFlag::eLOCK_ANGULAR_Z, true);
+		//body->setRigidDynamicLockFlag(PxRigidDynamicLockFlag::eLOCK_ANGULAR_Y, true);
+	}
+	else if (lockedOtherWay)
+	{
+		body->setRigidDynamicLockFlag(PxRigidDynamicLockFlag::eLOCK_LINEAR_X, true);
+		body->setRigidDynamicLockFlag(PxRigidDynamicLockFlag::eLOCK_ANGULAR_X, true);
+		body->setRigidDynamicLockFlag(PxRigidDynamicLockFlag::eLOCK_ANGULAR_Y, true);
+		body->setRigidDynamicLockFlag(PxRigidDynamicLockFlag::eLOCK_LINEAR_Y, true);
+	}
+	
+	//body->setSleepThreshold(5.0f);
+	//body->createShape(PxBoxGeometry(size), *material);
 	PxRigidBodyExt::updateMassAndInertia(*body, mass);
 	
 	s->addActor(*body);
@@ -66,6 +81,7 @@ void RigidSolid::update(double dt)
 void RigidSolid::applyForce(Vector3 fc)
 {
 	body->addForce(fc);
+	//body->setLinearVelocity(fc);
 }
 
 Vector3 RigidSolid::getPos()
@@ -76,4 +92,10 @@ Vector3 RigidSolid::getPos()
 Vector3 RigidSolid::getVel()
 {
 	return body->getLinearVelocity();
+}
+
+void RigidSolid::setPosXZ(Vector3 pos)
+{
+
+
 }

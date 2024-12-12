@@ -17,7 +17,7 @@ private:
 
 
 public:
-	RigidSolid(std::string shape, PxScene* s, PxPhysics* gP, Vector3 pos, Vector3 vel, Vector4 col, Vector3 size, float mass, float lf = 0);
+	RigidSolid(std::string shape, PxScene* s, PxPhysics* gP, Vector3 pos, Vector3 vel, Vector4 col, Vector3 size, float mass, float lf = 0, bool lockin = false, bool lockedotherway = false);
 	~RigidSolid();
 
 	//void Integrate(double t);
@@ -27,6 +27,8 @@ public:
 
 	Vector3 getPos();
 	Vector3 getVel();
+
+	void setPosXZ(Vector3 pos);
 
 
 };

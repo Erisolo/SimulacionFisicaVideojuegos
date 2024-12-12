@@ -12,24 +12,25 @@ protected:
 	bool alive = true;
 	std::vector<RigidSolid*> solids;
 	int actNumOfSolids = 0;
-	int maxNumofSolids;
+	int maxNumofSolids = 0;
 	PxScene* scene;
 	PxPhysics* gP;
 	bool constantGen = true;
-	
-
-private:
 	Vector3 fuente;
 	double framerate, actTime = 0;
 	std::mt19937 seed;
 	std::normal_distribution<> normal_dist;
 	float lifeTime;
+	void deleteDeadSolids();
+
+private:
+	
 
 	Vector3 meanVel, velFac, posFac;
 
 	void addSolid();
 	RigidSolid* generateSolid();
-	void deleteDeadSolids();
+	
 	void deleteSolids();
 	void asignateSystem(GenerationSystems g);
 

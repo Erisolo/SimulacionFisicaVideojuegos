@@ -13,7 +13,7 @@
 
 #include "SceneManager.h"
 
-std::string display_text = "This is a test";
+std::string display_text = "Tram BodyBoarders";
 using namespace physx;
 
 PxDefaultAllocator		gAllocator;
@@ -109,35 +109,14 @@ void keyPress(unsigned char key, const PxTransform& camera)
 {
 	PX_UNUSED(camera);
 
-	switch(toupper(key))
+	key = toupper(key);
+	sceneManager->Shoot(toupper(key), camera.p);
+	/*switch(key)
 	{
-	case 'P':
-	{
-		sceneManager->Shoot('P', camera.p);
-		break;
-	}
-	case 'G': //globo
-	{
-		sceneManager->Shoot('G', camera.p);
-		break;
-	}
-	case 'B': //bala
-	{
-		sceneManager->Shoot('B', camera.p);
-		break;
-	}
-	case 'V': //vertical
-	{
-		sceneManager->Shoot('V', camera.p);
-		break;
-	}
-	case ' ':
-	{
-		break;
-	}
 	default:
+		sceneManager->Shoot(key, camera.p);
 		break;
-	}
+	}*/
 }
 
 void onCollision(physx::PxActor* actor1, physx::PxActor* actor2)

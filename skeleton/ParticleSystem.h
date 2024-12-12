@@ -7,7 +7,7 @@ class ForceGenerator;
 
 enum GenerationSystems
 {
-	RAIN, EXPLOSION, FIREWORKS, MANGUERA
+	RAIN, EXPLOSION, FIREWORKS, MANGUERA, NONE
 };
 class ParticleSystem
 {

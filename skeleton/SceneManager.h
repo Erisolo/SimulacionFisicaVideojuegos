@@ -29,5 +29,8 @@ private:
 
 	PxScene* scene;
 	PxPhysics* gPhysics;
+
+	//now onto my pretty little player
+	RigidSolid* player;
 };
 
