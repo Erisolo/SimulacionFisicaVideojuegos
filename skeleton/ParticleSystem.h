@@ -20,6 +20,7 @@ protected:
 	void deleteParticles();
 
 	void updateParticles(double t);
+	Vector3 systemVel;
 
 
 private:
@@ -39,7 +40,7 @@ private:
 	void initSystem(GenerationSystems g);
 
 public:
-	ParticleSystem(Vector3 initPos, GenerationSystems g);
+	ParticleSystem(Vector3 initPos, GenerationSystems g, Vector3 systvel = Vector3(0.0));
 	ParticleSystem() {};
 	virtual ~ParticleSystem();
 

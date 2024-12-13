@@ -40,16 +40,24 @@ void Spring::changeStartingPoint(Particle* p)
 	springForceGenerator->changeStartPoint(p);
 }
 
+Spring::Spring(RigidSolid* p1, Particle* p2, float K, bool sp, bool negf)
+{
+	staticSP = sp;
+	float len = (p2->getPos() - p1->getPos()).normalize();
+	solids.push_back(p1);
+
+	springForceGenerator = new SpringForceGenerator(p2, K, len, sp, negf);
+}
+
 void Spring::Update(double t)
 {
 	//siempre q el origen siga vivo, lo actualizamos todo
 	updateParticles(t);
 
-	if (!staticSP)
-		springForceGenerator->getStartPoint()->Integrate(t);
+	//if (!staticSP)
+	springForceGenerator->getStartPoint()->Integrate(t); //peor de los casos, velocidad 0
 
 	deleteDeadParticles();
-
 }
 
 void Spring::aplyForceGenerators(std::vector<ForceGenerator*>& fg)
@@ -73,8 +81,8 @@ void Spring::aplyForceGenerators(std::vector<ForceGenerator*>& fg)
 	}
 	else if (solids.size() > 0)
 	{
-		springForceGenerator->Update(particles);
-		ParticleSystem::aplyForceGenerators(fg);
+		springForceGenerator->Update(solids);
+		//ParticleSystem::aplyForceGenerators(fg);
 
 	}
 	

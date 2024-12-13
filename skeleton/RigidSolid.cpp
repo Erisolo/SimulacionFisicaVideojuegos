@@ -15,7 +15,10 @@ RigidSolid::RigidSolid(std::string sh, PxScene* s, PxPhysics* gP, Vector3 pos, V
 	{
 		shape = CreateShape(PxBoxGeometry(size), gP->createMaterial(0.0f, 1.0f, 0.0f));
 	}
-	//else if ...
+	else if (sh == "ball")
+	{
+		shape = CreateShape(PxSphereGeometry(size.x), gP->createMaterial(0.0f, 1.0f, 0.0f));
+	}
 
 	//adding everything together
 	

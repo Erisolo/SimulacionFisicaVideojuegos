@@ -113,7 +113,7 @@ void ParticleSystem::asignateSystem(GenerationSystems g)
 
 }
 
-ParticleSystem::ParticleSystem(Vector3 initPos, GenerationSystems g)
+ParticleSystem::ParticleSystem(Vector3 initPos, GenerationSystems g, Vector3 systvel): systemVel(systvel)
 {
 	fuente = initPos;
 	seed = std::mt19937();
@@ -149,7 +149,7 @@ void ParticleSystem::Update(double t)
 		addParticle();
 		actTime = 0;
 	}
-	
+	fuente += systemVel * t;
 	updateParticles(t);
 	deleteDeadParticles();
 }

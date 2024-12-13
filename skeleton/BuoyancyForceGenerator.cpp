@@ -29,6 +29,8 @@ void BuoyancyForceGenerator::aplyForce(Particle* p, double dt)
 void BuoyancyForceGenerator::aplyForce(RigidSolid* p, double dt)
 {
 	float h = p->getPos().y;
+
+
 	float h0 = waterline->getPos().y;
 	Vector3 force = Vector3(0.0);
 

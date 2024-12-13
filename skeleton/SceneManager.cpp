@@ -39,10 +39,10 @@ void SceneManager::init()
 	
 	//setting up the floor
 	PxRigidStatic* suelo = gPhysics->createRigidStatic(PxTransform(Vector3(0, 0, -200)));
-	PxShape* shape = CreateShape(PxBoxGeometry(100, 0.1, 350));
+	PxShape* shape = CreateShape(PxBoxGeometry(100, 0.1, 350), gPhysics->createMaterial(0.0f, 1.0f, 0.0f));
 	suelo->attachShape(*shape);
 	scene->addActor(*suelo);
-	RenderItem* renderitem = new RenderItem(shape, suelo, { 0.8, 0.8, 0.8, 1 });
+	RenderItem* renderitem = new RenderItem(shape, suelo, { 0.2, 0.7, 0.1, 1 });
 
 	//now the side pannels of the floor
 	PxRigidStatic* side1 = gPhysics->createRigidStatic(PxTransform(Vector3(60, 5, -200)));
@@ -58,21 +58,17 @@ void SceneManager::init()
 	renderitem = new RenderItem(shape, side1, { 0.38, 0.96, 0.46, 1 });
 
 
-	//now setting the particles and stuff
-
-
 	//the force generators
+	forceGenerators.push_back(new GravityGenerator(9.8));
+
+
 	
 	//rigids
 	player = new RigidSolid("cube", scene, gPhysics, Vector3(0, 20, 0), Vector3(0), Vector4(8.9, 0, 3.2, 1), Vector3(2, 2, 2), 0.2, 0, true);
 	solids.push_back(player);
 
 	//making the obstacles
-	solidSystems.push_back(new ObstaclesGenerator(scene, gPhysics, Vector3(0, 3, -100), Vector3(0, 0, 50), Vector3(0.0), Vector3(20, 4, 30), 20));
-
-
-	//solid sytems
-	//solidSystems.push_back(new SolidsSystem(Vector3(0, 90, 0), scene, gPhysics,	RAIN));
+	solidSystems.push_back(new ObstaclesGenerator(scene, gPhysics, Vector3(0, 3, -140), Vector3(0, 0, 50), Vector3(0.0), Vector3(20, 4, 30), 20));
 }
 
 void SceneManager::Uptade(double t)
@@ -141,7 +137,7 @@ void SceneManager::Shoot(char c, Vector3 pos)
 	}
 	case ' ':	//plosion
 	{
-		//if (player->getVel().magnitudeSquared() < 1) //solo si está quieto 
+		if (player->getPos().y <=3) //solo si está en el suelo
 		{
 			player->applyForce(Vector3(0, 30000, 0));
 		}
@@ -154,6 +150,3 @@ void SceneManager::Shoot(char c, Vector3 pos)
 	}
 	
 }
-
-///se puede bloquear una dimensión o incluso dos) //jiji
-//

@@ -26,7 +26,7 @@ Particle::Particle(Vector3 pos, Vector3 vel, double lf, Vector4 col, float m): v
 
 void Particle::init()
 {
-	renderItem = new RenderItem( CreateShape(PxSphereGeometry(2)), &Pose, { 1, 1, 1, 1 });
+	renderItem = new RenderItem( CreateShape(PxSphereGeometry(0.5)), &Pose, { 1, 1, 1, 1 });
 }
 
 Particle::~Particle()
