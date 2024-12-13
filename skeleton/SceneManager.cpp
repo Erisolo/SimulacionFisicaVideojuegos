@@ -137,7 +137,7 @@ void SceneManager::Shoot(char c, Vector3 pos)
 	}
 	case ' ':	//plosion
 	{
-		if (player->getPos().y <=3) //solo si está en el suelo
+		if (player->getPos().y <=3 && player->getVel().y<= 1) //solo si está en el suelo quieto
 		{
 			player->applyForce(Vector3(0, 30000, 0));
 		}

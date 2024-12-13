@@ -37,34 +37,31 @@ void ObstaclesGenerator::generateNextObstacle()
 	}
 	else
 	{
-		int b = 4;
+		int b = 5;
 		switch (b)
 		{
-		case 1: //muelle
-
-
-			break;
-
 		case 2: //saltar un solo bloque
-			//makeFloor();
 			solids.push_back(new RigidSolid("cube", scene, gP, fuente, vel, color, Vector3(sizeOfPath.x, 2, 5), 4, lifeTime, false, true)); //ccreando el bloque
 			actNumOfSolids++;
-			//creando el suelo
-
 			break;
 
 		case 3:
-			//saltar dos bloques muy juntos
-			solids.push_back(new RigidSolid("cube", scene, gP, fuente + Vector3(10, 4, 0), vel, color, Vector3(sizeOfPath.x / 2 - 3, 6, 5), 4, lifeTime, false, true)); //ccreando el bloque
-			solids.push_back(new RigidSolid("cube", scene, gP, fuente + Vector3(-10, 4, 0), vel, color, Vector3(sizeOfPath.x / 2 - 3, 6, 5), 4, lifeTime, false, true)); //ccreando el bloque
+			//dos bloques con techo
+			solids.push_back(new RigidSolid("cube", scene, gP, fuente + Vector3(10, 2, 0), vel, color, Vector3(sizeOfPath.x / 2 - 3, 4, 5), 4, lifeTime, false, true)); //ccreando el bloque
+			solids.push_back(new RigidSolid("cube", scene, gP, fuente + Vector3(-10, 2, 0), vel, color, Vector3(sizeOfPath.x / 2 - 3, 4, 5), 4, lifeTime, false, true)); //ccreando el bloque
+			solids.push_back(new RigidSolid("cube", scene, gP, fuente + Vector3(0, 8, 0), vel, color, Vector3(sizeOfPath.x, 2, 5), 4, lifeTime, false, true)); //ccreando el bloque
 			actNumOfSolids += 2;
 			break;
 
-		case 4:	//bola q va de un lado a otro
+		case 4:	//bola q va de un lado a otro a por ti
 			particleSystems.push_back(new Spring(new RigidSolid("ball", scene, gP, fuente + Vector3(12, 0, 0), Vector3(-40, 0, 0), color, sizeOfPath/5, 2, lifeTime), 
 				new Particle(fuente - sizeOfPath/2, vel, 4), 400)); //se crea un nuevo muelle y se le aplica una fuerza
 			break;
 		case 5:
+			//bloque más alto
+			solids.push_back(new RigidSolid("cube", scene, gP, fuente + Vector3(0,2,0), vel, color, Vector3(sizeOfPath.x, 4, 5), 4, lifeTime, false, true)); //ccreando el bloque
+			actNumOfSolids++;
+
 			break;
 
 		default:
