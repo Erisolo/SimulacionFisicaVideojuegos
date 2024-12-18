@@ -71,7 +71,7 @@ Particle* ParticleSystem::generateParticle()
 	pos.z += normal_dist(seed) * posFac.z;
 
 
-	return new Particle(pos, vel, lifeTime, Vector4(1, 1, 1, 1), 1);
+	return new Particle(pos, vel, lifeTime, Vector4(0.96, 0.55, 0.91, 1), 1);
 }
 
 void ParticleSystem::asignateSystem(GenerationSystems g)
@@ -79,7 +79,7 @@ void ParticleSystem::asignateSystem(GenerationSystems g)
 	switch (g)
 	{
 	case RAIN:
-		meanVel = {0, -50, 0};
+		meanVel = {0, -70, 0};
 		velFac = { 0, 5, 0 };
 		posFac = { 15, 0, 15 };
 		lifeTime = 10;
@@ -113,7 +113,7 @@ void ParticleSystem::asignateSystem(GenerationSystems g)
 
 }
 
-ParticleSystem::ParticleSystem(Vector3 initPos, GenerationSystems g, Vector3 systvel): systemVel(systvel)
+ParticleSystem::ParticleSystem(Vector3 initPos, GenerationSystems g, Vector3 systvel, double syslf): systemVel(systvel), sysLifetime(syslf)
 {
 	fuente = initPos;
 	seed = std::mt19937();
@@ -148,6 +148,12 @@ void ParticleSystem::Update(double t)
 	{
 		addParticle();
 		actTime = 0;
+	}
+	if (sysLifetime > 0)
+	{
+		sysLifetime -= t;
+		alive = sysLifetime > 0;
+
 	}
 	fuente += systemVel * t;
 	updateParticles(t);

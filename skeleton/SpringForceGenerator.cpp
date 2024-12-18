@@ -1,5 +1,10 @@
 #include "SpringForceGenerator.h"
 
+SpringForceGenerator::~SpringForceGenerator()
+{
+	delete startPoint;
+}
+
 void SpringForceGenerator::Update(std::vector<Particle*>& ps, double dt)
 {
 	if (!staticSP)

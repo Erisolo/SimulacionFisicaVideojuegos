@@ -24,7 +24,7 @@ public:
 	inline bool alive() noexcept { return isAlive; }
 	void update(double dt);
 	void applyForce(Vector3 fc);
-
+	void setSpeed(Vector3 s);
 	Vector3 getPos();
 	Vector3 getVel();
 

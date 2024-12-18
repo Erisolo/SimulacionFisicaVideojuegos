@@ -21,5 +21,10 @@ private:
 	void makeFloor();
 	void updateParticleSystems(double dt);
 
+	void deleteDeadSystems();
+
+	void insert(RigidSolid* r);
+	void inster(ParticleSystem* s);
+
 };
 

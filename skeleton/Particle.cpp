@@ -1,7 +1,7 @@
 #include "Particle.h"
 #include <cmath>
 
-Particle::Particle(Vector3 pos, Vector3 Vel, float m): vel(Vel), myMass(m)
+Particle::Particle(Vector3 pos, Vector3 Vel, float m, float lf): vel(Vel), myMass(m), lifeTime(lf)
 {
 	forces = Vector3(0);
 	Pose = PxTransform(pos);
@@ -20,8 +20,8 @@ Particle::Particle(Vector3 pos, Vector3 vel, double lf, Vector4 col, float m): v
 	isAlive = true;
 
 
-	this->init();
-
+	//this->init();
+	renderItem = new RenderItem(CreateShape(PxSphereGeometry(0.5)), &Pose, col);
 }
 
 void Particle::init()

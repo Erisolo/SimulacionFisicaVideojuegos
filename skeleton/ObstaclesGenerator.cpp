@@ -29,15 +29,15 @@ ObstaclesGenerator::~ObstaclesGenerator()
 
 void ObstaclesGenerator::generateNextObstacle()
 {
-	if (numobstPassed != 0 && numobstPassed % obsToRain == 0)
+	if (/*numobstPassed != 0 &&*/ numobstPassed % obsToRain == 0)
 	{
 		//generamos lluvia
-		particleSystems.push_back(new ParticleSystem(Vector3(fuente.x, 80, fuente.y), RAIN, vel));
+		particleSystems.push_back(new ParticleSystem(Vector3(fuente.x, 80, fuente.z), RAIN, vel, lifeTime));
 
 	}
 	else
 	{
-		int b = 5;
+		int b = 4;
 		switch (b)
 		{
 		case 2: //saltar un solo bloque
@@ -55,7 +55,7 @@ void ObstaclesGenerator::generateNextObstacle()
 
 		case 4:	//bola q va de un lado a otro a por ti
 			particleSystems.push_back(new Spring(new RigidSolid("ball", scene, gP, fuente + Vector3(12, 0, 0), Vector3(-40, 0, 0), color, sizeOfPath/5, 2, lifeTime), 
-				new Particle(fuente - sizeOfPath/2, vel, 4), 400)); //se crea un nuevo muelle y se le aplica una fuerza
+				new Particle(fuente - sizeOfPath/2, vel, 4, lifeTime), 400)); //se crea un nuevo muelle y se le aplica una fuerza
 			break;
 		case 5:
 			//bloque más alto
@@ -85,6 +85,7 @@ void ObstaclesGenerator::Update(double dt)
 	updateSolids(dt);
 	updateParticleSystems(dt);
 	deleteDeadSolids();
+	deleteDeadSystems();
 
 }
 
@@ -104,5 +105,51 @@ void ObstaclesGenerator::updateParticleSystems(double dt)
 		}
 	}
 
+}
+
+void ObstaclesGenerator::deleteDeadSystems()
+{
+	for (int i = 0; i < particleSystems.size(); i++)
+	{
+		if (particleSystems[i] != nullptr && !particleSystems[i]->isAlive())
+		{
+			delete particleSystems[i];
+			particleSystems[i] = nullptr;
+		}
+	}
+}
+
+void ObstaclesGenerator::insert(RigidSolid* r)
+{
+	bool added = false; int i = 0;
+
+	while (!added && i < solids.size())
+	{
+		if (solids[i] == nullptr)
+		{
+			solids[i] = r;
+			added = true;
+		}
+		i++;
+	}
+	if (!added)
+		solids.push_back(r);
+}
+
+void ObstaclesGenerator::inster(ParticleSystem* s)
+{
+	bool added = false; int i = 0;
+
+	while (!added && i < solids.size())
+	{
+		if (particleSystems[i] == nullptr)
+		{
+			particleSystems[i] = s;
+			added = true;
+		}
+		i++;
+	}
+	if (!added)
+		particleSystems.push_back(s);
 }
 

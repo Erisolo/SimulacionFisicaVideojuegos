@@ -17,6 +17,8 @@ public:
 	Spring(Particle* p1, Particle* p2, float K = 70, bool sp = true, bool negf = true);
 	Spring(RigidSolid* p1, Particle* p2, float K = 70, bool sp = true, bool negf = true);
 
+	~Spring();
+
 	void attatchParticle(Particle* p);
 	void deatatchParticle();
 	Particle* getAtatchedParticle() 

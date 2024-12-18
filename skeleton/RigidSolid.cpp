@@ -84,7 +84,12 @@ void RigidSolid::update(double dt)
 void RigidSolid::applyForce(Vector3 fc)
 {
 	body->addForce(fc);
-	//body->setLinearVelocity(fc);
+	
+}
+
+void RigidSolid::setSpeed(Vector3 s)
+{
+	body->setLinearVelocity(s);
 }
 
 Vector3 RigidSolid::getPos()

@@ -49,13 +49,32 @@ Spring::Spring(RigidSolid* p1, Particle* p2, float K, bool sp, bool negf)
 	springForceGenerator = new SpringForceGenerator(p2, K, len, sp, negf);
 }
 
+Spring::~Spring()
+{
+	if(particles.size()>0)
+		delete particles[0];
+	else if(solids.size() > 0)
+		delete solids[0];
+
+	delete springForceGenerator;
+}
+
 void Spring::Update(double t)
 {
+
+	/*if (sysLifetime > 0)
+	{
+		sysLifetime -= t;
+		alive = sysLifetime > 0;
+
+	}*/
 	//siempre q el origen siga vivo, lo actualizamos todo
 	updateParticles(t);
 
 	//if (!staticSP)
 	springForceGenerator->getStartPoint()->Integrate(t); //peor de los casos, velocidad 0
+	if (!springForceGenerator->getStartPoint()->alive())
+		alive = false;
 
 	deleteDeadParticles();
 }

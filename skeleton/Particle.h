@@ -10,7 +10,7 @@ class Particle
 {
 
 public:
-	Particle(Vector3 pos, Vector3 vel, float m);
+	Particle(Vector3 pos, Vector3 vel, float m, float lf = 0);
 	Particle(Vector3 pos, Vector3 vel, double lf, Vector4 col, float m);
 
 	virtual void init();

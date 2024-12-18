@@ -21,7 +21,7 @@ protected:
 
 	void updateParticles(double t);
 	Vector3 systemVel;
-
+	double sysLifetime;
 
 private:
 	
@@ -40,11 +40,13 @@ private:
 	void initSystem(GenerationSystems g);
 
 public:
-	ParticleSystem(Vector3 initPos, GenerationSystems g, Vector3 systvel = Vector3(0.0));
+	ParticleSystem(Vector3 initPos, GenerationSystems g, Vector3 systvel = Vector3(0.0), double syslf = 0);
 	ParticleSystem() {};
 	virtual ~ParticleSystem();
 
 	virtual void Update(double t);
+
+	bool isAlive() { return alive; }
 
 	virtual void aplyForceGenerators(std::vector<ForceGenerator*>& fg);
 };

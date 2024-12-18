@@ -68,7 +68,7 @@ void SceneManager::init()
 	solids.push_back(player);
 
 	//making the obstacles
-	solidSystems.push_back(new ObstaclesGenerator(scene, gPhysics, Vector3(0, 3, -140), Vector3(0, 0, 50), Vector3(0.0), Vector3(20, 4, 30), 20));
+	solidSystems.push_back(new ObstaclesGenerator(scene, gPhysics, Vector3(0, 3, -140), Vector3(0, 0, 50), Vector3(0.0), Vector3(20, 4, 30), 5));
 }
 
 void SceneManager::Uptade(double t)
@@ -137,9 +137,10 @@ void SceneManager::Shoot(char c, Vector3 pos)
 	}
 	case ' ':	//plosion
 	{
-		if (player->getPos().y <=3 && player->getVel().y<= 1) //solo si está en el suelo quieto
+		if (player->getPos().y <=3 && player->getVel().magnitude() <= 1) //solo si está en el suelo quieto
 		{
-			player->applyForce(Vector3(0, 30000, 0));
+			//player->applyForce(Vector3(0, 35000, 0));
+			player->setSpeed(Vector3(0, 20, 0));
 		}
 		break;
 	}

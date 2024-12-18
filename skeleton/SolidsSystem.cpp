@@ -37,7 +37,7 @@ RigidSolid* SolidsSystem::generateSolid()
 
 void SolidsSystem::deleteDeadSolids()
 {
-	for (int i = 0; i < maxNumofSolids; i++)
+	for (int i = 0; i < solids.size(); i++)
 	{
 		if (solids[i] != nullptr && !solids[i]->alive())
 		{
