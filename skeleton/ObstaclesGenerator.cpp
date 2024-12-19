@@ -36,7 +36,10 @@ void ObstaclesGenerator::generateNextObstacle()
 		{
 			alive = false;
 		}
-		particleSystems.push_back(new ParticleSystem(Vector3(fuente.x, 80, fuente.z), RAIN, vel, lifeTime));
+		else
+		{
+			particleSystems.push_back(new ParticleSystem(Vector3(fuente.x, 80, fuente.z), RAIN, vel, lifeTime));
+		}
 
 	}
 	else

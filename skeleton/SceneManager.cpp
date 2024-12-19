@@ -192,6 +192,8 @@ void SceneManager::gameWon()
 	solidSystems[0] = nullptr;
 
 	//y hacemos la celebración
-	sistemaParticulas.push_back(new ParticleSystem(Vector3(25, 10, 25), MANGUERA));
+	sistemaParticulas.push_back(new ParticleSystem(Vector3(-50, 10, -15), MANGUERA));
+	sistemaParticulas.push_back(new ParticleSystem(Vector3(50, 10, -15), MANGUERA));
+	forceGenerators.push_back(new TorbellinoGenerator(20, Vector3(0, 70, -15), 200, 20));
 
 }
