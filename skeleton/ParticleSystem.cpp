@@ -71,7 +71,7 @@ Particle* ParticleSystem::generateParticle()
 	pos.z += normal_dist(seed) * posFac.z;
 
 
-	return new Particle(pos, vel, lifeTime, Vector4(0.96, 0.55, 0.91, 1), 1);
+	return new Particle(pos, vel, lifeTime, Vector4(0.96, 0.55, 0.91, 1), mass);
 }
 
 void ParticleSystem::asignateSystem(GenerationSystems g)
@@ -86,6 +86,7 @@ void ParticleSystem::asignateSystem(GenerationSystems g)
 		maxNumofParts = 500;
 		framerate = 0.01;
 		constantGen = true;
+		mass = 2;
 		break;
 	case EXPLOSION:
 		meanVel = { 0, 0, 0};
@@ -95,6 +96,7 @@ void ParticleSystem::asignateSystem(GenerationSystems g)
 		maxNumofParts = 100;
 		framerate = 0.1;
 		constantGen = false;
+		mass = 5;
 		break;
 	case MANGUERA:
 		meanVel = { -30, 60, -100};
@@ -104,6 +106,7 @@ void ParticleSystem::asignateSystem(GenerationSystems g)
 		maxNumofParts = 1000;
 		framerate = 0.001;
 		constantGen = true;
+		mass = 3;
 		break;
 	case FIREWORKS:
 		break;

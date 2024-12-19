@@ -30,6 +30,7 @@ private:
 	double framerate, actTime = 0;
 	std::mt19937 seed;
 	bool constantGen;
+	float mass;
 	std::normal_distribution<> normal_dist;
 
 	Vector3 meanVel, velFac, posFac;
