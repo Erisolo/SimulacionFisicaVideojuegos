@@ -57,7 +57,6 @@ void ObstaclesGenerator::generateNextObstacle()
 		if (b < 0) b = 0;
 		if (b > 3) b = 3;
 
-
 		switch (b)
 		{
 		case 2: //saltar un solo bloque
@@ -79,7 +78,7 @@ void ObstaclesGenerator::generateNextObstacle()
 			break;
 		case 3:
 			//bloque más alto
-			solids.push_back(new RigidSolid("cube", scene, gP, fuente + Vector3(0,2,0), vel, color, Vector3(sizeOfPath.x, 4, 5), 4, lifeTime, false, true)); //ccreando el bloque
+			solids.push_back(new RigidSolid("cube", scene, gP, fuente + Vector3(0,4,0), vel, color, Vector3(sizeOfPath.x, 6, 5), 4, lifeTime, false, true)); //ccreando el bloque
 			actNumOfSolids++;
 
 			break;
