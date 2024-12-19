@@ -172,6 +172,7 @@ void SceneManager::onColision(physx::PxActor* actor1, physx::PxActor* actor2)
 			//forceGenerators.push_back(new ExplosionGenerator(player->getPos(), 1600000, 50, 1));
 			sistemaParticulas.push_back(new ParticleSystem(player->getPos(), EXPLOSION));
 			gameOver = true;
+			lostGame();
 		}
 
 	}
@@ -181,9 +182,10 @@ void SceneManager::onColision(physx::PxActor* actor1, physx::PxActor* actor2)
 void SceneManager::lostGame()
 {
 	delete obstacleGenerator; //borramos el generador de obstáculos
+	obstacleGenerator = nullptr;
 	solidSystems[0] = nullptr;
-	delete player;
-	player = nullptr;
+	//delete player;
+	//player = nullptr;
 }
 
 void SceneManager::gameWon()
@@ -194,6 +196,6 @@ void SceneManager::gameWon()
 	//y hacemos la celebración
 	sistemaParticulas.push_back(new ParticleSystem(Vector3(-50, 10, -15), MANGUERA));
 	sistemaParticulas.push_back(new ParticleSystem(Vector3(50, 10, -15), MANGUERA));
-	forceGenerators.push_back(new TorbellinoGenerator(20, Vector3(0, 70, -15), 200, 20));
+	forceGenerators.push_back(new TorbellinoGenerator(0.7, Vector3(0, 10, 0), 500, 12));
 
 }
