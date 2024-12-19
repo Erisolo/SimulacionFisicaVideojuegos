@@ -38,7 +38,7 @@ void SceneManager::init()
 {
 	
 	//setting up the floor
-	PxRigidStatic* suelo = gPhysics->createRigidStatic(PxTransform(Vector3(0, 0, -200)));
+	suelo = gPhysics->createRigidStatic(PxTransform(Vector3(0, 0, -200)));
 	PxShape* shape = CreateShape(PxBoxGeometry(100, 0.1, 350), gPhysics->createMaterial(0.0f, 1.0f, 0.0f));
 	suelo->attachShape(*shape);
 	scene->addActor(*suelo);
@@ -46,13 +46,13 @@ void SceneManager::init()
 
 	//now the side pannels of the floor
 	PxRigidStatic* side1 = gPhysics->createRigidStatic(PxTransform(Vector3(60, 5, -200)));
-	shape = CreateShape(PxBoxGeometry(40, 5, 250));
+	shape = CreateShape(PxBoxGeometry(40, 5, 270));
 	side1->attachShape(*shape);
 	scene->addActor(*side1);
 	renderitem = new RenderItem(shape, side1, { 0.38, 0.96, 0.46, 1 });
 
 	side1 = gPhysics->createRigidStatic(PxTransform(Vector3(-60, 5, -200)));
-	shape = CreateShape(PxBoxGeometry(40, 5, 250));
+	shape = CreateShape(PxBoxGeometry(40, 5, 270));
 	side1->attachShape(*shape);
 	scene->addActor(*side1);
 	renderitem = new RenderItem(shape, side1, { 0.38, 0.96, 0.46, 1 });
@@ -68,7 +68,14 @@ void SceneManager::init()
 	solids.push_back(player);
 
 	//making the obstacles
-	solidSystems.push_back(new ObstaclesGenerator(scene, gPhysics, Vector3(0, 3, -140), Vector3(0, 0, 50), Vector3(0.0), Vector3(20, 4, 30), 5));
+	obstacleGenerator = new ObstaclesGenerator(scene, gPhysics, Vector3(0, 3, -140), Vector3(0, 0, 50), Vector3(0.0), Vector3(20, 4, 30), 5);
+	solidSystems.push_back(obstacleGenerator);
+
+
+
+	//para combrobar colisiones
+	player->getActor()->userData = (void*)"Player";
+	suelo->userData = (void*)"Suelo";
 }
 
 void SceneManager::Uptade(double t)
@@ -124,20 +131,21 @@ void SceneManager::Uptade(double t)
 		}
 
 	}
+
+	//comprobar si ha ganado el jugador
+	if (obstacleGenerator != nullptr && !obstacleGenerator->isAlive())
+	{
+		gameWon();
+	}
 }
 
 void SceneManager::Shoot(char c, Vector3 pos)
 {
 	switch (c)
 	{
-	case 'P':	//plosion
-	{
-		//forceGenerators.push_back(new ExplosionGenerator(Vector3(0, 0, 0), 1600000, 50, 1));
-		break;
-	}
 	case ' ':	//plosion
 	{
-		if (player->getPos().y <=3 && player->getVel().magnitude() <= 1) //solo si está en el suelo quieto
+		if (player != nullptr && player->getPos().y <=3 && player->getVel().magnitude() <= 1) //solo si está en el suelo quieto
 		{
 			//player->applyForce(Vector3(0, 35000, 0));
 			player->setSpeed(Vector3(0, 20, 0));
@@ -150,4 +158,40 @@ void SceneManager::Shoot(char c, Vector3 pos)
 		break;
 	}
 	
+}
+
+void SceneManager::onColision(physx::PxActor* actor1, physx::PxActor* actor2)
+{
+	//el player solo puede colisionar de manera segura con el suelo. el resto es muerte
+	if (!gameOver)
+	{
+		if ((static_cast<const char*>(actor1->userData) == "Player" && static_cast<const char*>(actor2->userData) != "Suelo") ||
+			(static_cast<const char*>(actor2->userData) == "Player" && static_cast<const char*>(actor1->userData) != "Suelo"))
+		{
+
+			//forceGenerators.push_back(new ExplosionGenerator(player->getPos(), 1600000, 50, 1));
+			sistemaParticulas.push_back(new ParticleSystem(player->getPos(), EXPLOSION));
+			gameOver = true;
+		}
+
+	}
+	
+}
+
+void SceneManager::lostGame()
+{
+	delete obstacleGenerator; //borramos el generador de obstáculos
+	solidSystems[0] = nullptr;
+	delete player;
+	player = nullptr;
+}
+
+void SceneManager::gameWon()
+{
+	delete obstacleGenerator; //borramos el generador de obstáculos
+	solidSystems[0] = nullptr;
+
+	//y hacemos la celebración
+	sistemaParticulas.push_back(new ParticleSystem(Vector3(25, 10, 25), MANGUERA));
+
 }

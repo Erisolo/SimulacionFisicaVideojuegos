@@ -29,15 +29,19 @@ ObstaclesGenerator::~ObstaclesGenerator()
 
 void ObstaclesGenerator::generateNextObstacle()
 {
-	if (/*numobstPassed != 0 &&*/ numobstPassed % obsToRain == 0)
+	if (numobstPassed != 0 && numobstPassed % obsToRain == 0)
 	{
-		//generamos lluvia
+		//comprobamos si ha ganado
+		if (numobstPassed == obsToWin)
+		{
+			alive = false;
+		}
 		particleSystems.push_back(new ParticleSystem(Vector3(fuente.x, 80, fuente.z), RAIN, vel, lifeTime));
 
 	}
 	else
 	{
-		int b = 4;
+		int b = 2;
 		switch (b)
 		{
 		case 2: //saltar un solo bloque
@@ -67,9 +71,9 @@ void ObstaclesGenerator::generateNextObstacle()
 		default:
 			break;
 		}
-		numobstPassed++;
+		
 	}
-	
+	numobstPassed++;
 
 }
 

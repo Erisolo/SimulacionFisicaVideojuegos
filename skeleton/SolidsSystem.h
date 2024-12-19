@@ -45,5 +45,7 @@ public:
 
 	virtual void aplyForceGenerators(std::vector<ForceGenerator*>& fg);
 	void updateSolids(double t);
+
+	bool isAlive() { return alive; }
 };
 

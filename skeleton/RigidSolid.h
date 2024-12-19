@@ -27,6 +27,7 @@ public:
 	void setSpeed(Vector3 s);
 	Vector3 getPos();
 	Vector3 getVel();
+	PxRigidDynamic* getActor() { return body; }
 
 	void setPosXZ(Vector3 pos);
 

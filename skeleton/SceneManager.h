@@ -18,6 +18,9 @@ public:
 	void Shoot(char c, Vector3 pos);
 
 	void addNecesitiesForRigids(PxScene* s, PxPhysics* gP) noexcept { scene = s; gPhysics = gP; }
+	void onColision(physx::PxActor* actor1, physx::PxActor* actor2);
+
+	void gameWon();
 
 
 private:
@@ -32,5 +35,10 @@ private:
 
 	//now onto my pretty little player
 	RigidSolid* player;
+	PxRigidStatic* suelo;
+	SolidsSystem* obstacleGenerator;
+	bool gameOver = false;
+
+	void lostGame();
 };
 
